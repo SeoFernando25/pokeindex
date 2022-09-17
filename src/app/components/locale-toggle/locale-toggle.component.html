@@ -1,0 +1,7 @@
+<button
+  mat-stroked-button
+  (click)="changeLanguage()"
+  matTooltip="{{ 'locale-toggle.tooltip' | translate }}"
+>
+  {{ translate.currentLang.toUpperCase() }}
+</button>

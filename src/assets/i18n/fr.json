@@ -1,0 +1,8 @@
+{
+  "HelloWorld": "Bonjour le monde",
+  "404": "Un LUXIO sauvage apparaît!",
+  "locale-toggle.tooltip": "Changer les paramètres régionaux",
+  "LoginFormLabels.username": "Nom d’utilisateur",
+  "LoginFormLabels.password": "mot de passe",
+  "LoginFormLabels.submit": "Soumettre"
+}

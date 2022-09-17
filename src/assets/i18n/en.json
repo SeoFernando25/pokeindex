@@ -1,0 +1,8 @@
+{
+  "HelloWorld": "Hello World",
+  "404": "A wild LUXIO appeared!",
+  "locale-toggle.tooltip": "Change the locale",
+  "LoginFormLabels.username": "Username",
+  "LoginFormLabels.password": "Password",
+  "LoginFormLabels.submit": "Submit"
+}

@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+// Angular Material Theme
+@import "./theme.scss";
+
+// Tailwind setup
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+// Font Awesome Icons
+@import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "@fortawesome/fontawesome-free/scss/solid.scss";
+// For more icons see https://fontawesome.com/docs/web/use-with/scss#get-set-up
+
+body,
+html {
+  height: 100%;
+  margin: 0px auto;
+  padding: 0px auto;
+}
+
+.article {
+  width: 50%;
+  @apply bg-white;
+  @apply shadow-lg;
+  @apply ml-auto;
+  @apply mr-auto;
+  @apply min-h-screen;
+  @apply p-4;
+}
+

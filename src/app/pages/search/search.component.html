@@ -1,0 +1,26 @@
+<!-- <p>Translation: {{ "LoginFormLabels.username" | translate }}</p> -->
+
+<!-- Search Bar -->
+<!-- <mat-form-field
+  appearance="standard"
+  class="transition ease-in-out min-w-full hover:translate-x-4 duration-[5000]"
+>
+  <mat-label>Pokémon name or number</mat-label>
+  <span matPrefix class="fa-solid fa-magnifying-glass">&nbsp;</span>
+  <input class="" type="tel" matInput placeholder="Charizard" />
+</mat-form-field> -->
+
+<!-- 2 Horizontal flex boxes (Filter, Search) -->
+<div class="h-full flex flex-row">
+  <!-- Filter -->
+  <div class="flex flex-[0.2] flex-row bg-red-300 p-4">
+    <mat-form-field appearance="standard" class="w-full">
+      <mat-label>Pokémon name or number</mat-label>
+      <span matPrefix class="fa-solid fa-magnifying-glass">&nbsp;</span>
+      <input class="" type="text" matInput placeholder="Charizard" />
+    </mat-form-field>
+  </div>
+
+  <!-- Search Results -->
+  <div class="flex flex-1 flex-row bg-green-300 p-4"></div>
+</div>
