@@ -22,6 +22,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LocaleToggleComponent } from './components/locale-toggle/locale-toggle.component';
 import { SearchComponent } from './pages/search/search.component';
+import { PokecardComponent } from './components/pokecard/pokecard.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -35,6 +36,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FallbackComponent,
     LocaleToggleComponent,
     SearchComponent,
+    PokecardComponent,
   ],
   imports: [
     BrowserModule,

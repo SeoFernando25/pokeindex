@@ -116,6 +116,7 @@ $mat-dark-theme-background: (
   disabled-list-option:     $dark-bg-lighter-10,
 );
 
+// Compute font config
 @include mat.core();
 
 // Theme Config

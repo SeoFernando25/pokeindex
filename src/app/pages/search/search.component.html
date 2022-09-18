@@ -1,19 +1,7 @@
-<!-- <p>Translation: {{ "LoginFormLabels.username" | translate }}</p> -->
-
-<!-- Search Bar -->
-<!-- <mat-form-field
-  appearance="standard"
-  class="transition ease-in-out min-w-full hover:translate-x-4 duration-[5000]"
->
-  <mat-label>Pokémon name or number</mat-label>
-  <span matPrefix class="fa-solid fa-magnifying-glass">&nbsp;</span>
-  <input class="" type="tel" matInput placeholder="Charizard" />
-</mat-form-field> -->
-
 <!-- 2 Horizontal flex boxes (Filter, Search) -->
-<div class="h-full flex flex-row">
-  <!-- Filter -->
-  <div class="flex flex-[0.2] flex-row bg-red-300 p-4">
+<div class="flex flex-col sm:flex-row">
+  <!-- Search/Filters -->
+  <div class="p-4 flex-1 flex-row bg-red-100">
     <mat-form-field appearance="standard" class="w-full">
       <mat-label>Pokémon name or number</mat-label>
       <span matPrefix class="fa-solid fa-magnifying-glass">&nbsp;</span>
@@ -22,5 +10,25 @@
   </div>
 
   <!-- Search Results -->
-  <div class="flex flex-1 flex-row bg-green-300 p-4"></div>
+  <div class="p-4 bg-green-100">
+    <div
+      class="bg-red-100 self-center ml-0 mr-0 mt-0 flex flex-wrap justify-center gap-4"
+    >
+      <app-pokecard></app-pokecard>
+      <app-pokecard></app-pokecard>
+      <app-pokecard></app-pokecard>
+      <app-pokecard></app-pokecard>
+      <app-pokecard></app-pokecard>
+      <app-pokecard></app-pokecard>
+      <app-pokecard></app-pokecard>
+      <app-pokecard></app-pokecard>
+      <app-pokecard></app-pokecard>
+      <app-pokecard></app-pokecard>
+      <app-pokecard></app-pokecard>
+      <app-pokecard></app-pokecard>
+      <app-pokecard></app-pokecard>
+      <app-pokecard></app-pokecard>
+      <app-pokecard></app-pokecard>
+    </div>
+  </div>
 </div>
