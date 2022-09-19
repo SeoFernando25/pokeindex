@@ -11,8 +11,10 @@ import { transition, trigger, useAnimation } from '@angular/animations';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [
-    trigger('fromLeftEasing', [transition('* => home', useAnimation(fromLeftEasing))]),
-    trigger('fromRightEasing', [transition('home => *', useAnimation(fromRightEasing))]),
+    trigger('anyHome', [transition('* => home', useAnimation(fromLeftEasing))]),
+    trigger('homeSearch', [transition('home => search', useAnimation(fromRightEasing))]),
+    trigger('searchEntry', [transition('search => entry', useAnimation(fromRightEasing))]),
+    trigger('entrySearch', [transition('entry => search', useAnimation(fromLeftEasing))]),
   ]
 })
 export class AppComponent {

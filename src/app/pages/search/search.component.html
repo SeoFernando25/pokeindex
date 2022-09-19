@@ -1,19 +1,15 @@
 <!-- 2 Horizontal flex boxes (Filter, Search) -->
 <div
-  class="flex flex-col sm:flex-row"
+  class="flex flex-col sm:flex-row bg-purple-50"
   *ngIf="pokedex.filteredPokemons.getValue().slice(0, 50).length !== 0"
 >
   <!-- Search/Filters -->
-  <div class="p-4 flex-1 flex-row sm:max-w-[35%]">
-    <mat-form-field appearance="standard" class="w-full">
-      <mat-label>Pokémon name or number</mat-label>
-      <span matPrefix class="fa-solid fa-magnifying-glass">&nbsp;</span>
-      <input class="" type="text" matInput placeholder="Charizard" />
-    </mat-form-field>
+  <div class="p-4 flex-1 flex-row sm:max-w-[35%] bg-blue-100">
+    TODO: Add search filters
   </div>
 
   <!-- Search Results -->
-  <div class="p-4">
+  <div class="p-2 bg-red-200 flex-1">
     <div class="self-center ml-0 mr-0 mt-0 flex flex-wrap justify-center gap-4">
       <!-- Pokemon Card list -->
       <app-pokecard
@@ -29,7 +25,7 @@
 <!-- No cards found -->
 <!-- flex center horizontal and verical -->
 <div
-  class="m-auto flex justify-center items-center h-full"
+  class="flex justify-center flex-1 w-screen bg-red-50"
   *ngIf="pokedex.filteredPokemons.getValue().slice(0, 50).length === 0"
 >
   <!-- Aling vertical -->
@@ -38,7 +34,7 @@
     <img
       alt="MISSINGNO"
       src="/assets/img/MISSINGNO.webp"
-      class="object-contain h-[50vh]"
+      class="object-contain h-[50vh] pixelated"
     />
     <span>A wild MISSINGNO appeared!</span>
   </div>

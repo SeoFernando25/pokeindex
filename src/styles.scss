@@ -28,6 +28,11 @@ html {
   @apply p-4;
 }
 
+// For sprites
+.pixelated {
+  image-rendering: pixelated;
+}
+
 // Card gradient
 
 .card-gradient {

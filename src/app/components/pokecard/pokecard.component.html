@@ -1,15 +1,22 @@
 <div
-  class="p-2 w-[200px] card-gradient rounded-xl transform transition hover:scale-110"
+  (click)="onClick()"
+  #visibleHookDiv
+  class="flex flex-col p-2 w-[150px] h-[245px] card-gradient rounded-xl transform transition hover:scale-110"
 >
-  <div class="bg-white rounded-t-lg w-full">
+  <div class="bg-slate-300 rounded-t-lg w-full">
     <img
-      class="p-2 m-auto w-[90%] h-auto object-contain"
-      src="https://img.pokemondb.net/sprites/home/normal/raikou.png"
+      class="p-2 m-auto w-[90%] h-auto min-h-[50%] object-contain"
+      loading="lazy"
+      src="{{
+        this.pokemon
+          ? this.pokemon.sprites.front_default || '/assets/img/MISSINGNO.webp'
+          : '/assets/img/MISSINGNO.webp'
+      }}"
       alt="Photo
-    of a Raikou"
+    of a {{ pokedex.identifierToReadableName(this.pokemonName) }}"
     />
   </div>
-  <div class="bg-white rounded-b-lg p-2">
+  <div class="bg-white rounded-b-lg p-2 flex-1 text-center">
     <h4 class="text-lg font-bold">
       {{ pokedex.identifierToReadableName(this.pokemonName) }}
     </h4>

@@ -1,30 +1,26 @@
 <!-- Fine example for reference -->
 <!-- https://flowbite.com/docs/components/navbar/ -->
-<nav class="p-4">
-  <div class="container flex flex-wrap justify-between items-center mx-auto">
-    <!-- Left -->
-    <div class="inline-flex">
-      <!-- Logo -->
-      <a routerLink="/" class="flex items-center select-none">
-        <span class="text-4xl">🦕</span>
-        <span class="px-2 text-2xl">PokeIndex</span>
-      </a>
-
-      <!-- Search Bar -->
-      <mat-form-field appearance="standard" class="w-full">
-        <mat-label>Pokémon name or number</mat-label>
-        <span matPrefix class="fa-solid fa-magnifying-glass">&nbsp;</span>
-        <input
-          matInput
-          aria-label="Pokemon Name or Number"
-          [value]="searchValue"
-          (input)="onInput($event)"
-          (change)="onInput($event)"
-          (focus)="onFocus()"
-        />
-      </mat-form-field>
-    </div>
-    <!-- Locale switch -->
-    <app-locale-toggle></app-locale-toggle>
-  </div>
+<nav
+  class="p-4 w-full bg-white self-center inline-flex flex-wrap justify-center items-center gap-4 z-10 overflow-hidden"
+>
+  <!-- Logo -->
+  <a routerLink="/" class="flex items-center select-none gap-4">
+    <span class="text-4xl">🦕</span>
+    <span class="text-2xl">PokeIndex</span>
+  </a>
+  <!-- Locale switch -->
+  <app-locale-toggle></app-locale-toggle>
+  <!-- Search Bar -->
+  <mat-form-field appearance="standard" class="flex-1">
+    <mat-label>Pokémon name</mat-label>
+    <span matPrefix class="fa-solid fa-magnifying-glass">&nbsp;</span>
+    <input
+      matInput
+      aria-label="Pokemon Name or Number"
+      [value]="searchValue"
+      (input)="onInput($event)"
+      (change)="onInput($event)"
+      (focus)="onFocus()"
+    />
+  </mat-form-field>
 </nav>

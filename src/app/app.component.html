@@ -1,10 +1,13 @@
 <div class="wrapper">
-  <app-titlebar></app-titlebar>
-
+  <div>
+    <app-titlebar></app-titlebar>
+  </div>
   <main
-    class="bg-gray-200 flex-1"
-    [@fromLeftEasing]="getState(o)"
-    [@fromRightEasing]="getState(o)"
+    class="flex-1"
+    [@anyHome]="getState(o)"
+    [@homeSearch]="getState(o)"
+    [@searchEntry]="getState(o)"
+    [@entrySearch]="getState(o)"
   >
     <router-outlet #o="outlet"></router-outlet>
   </main>

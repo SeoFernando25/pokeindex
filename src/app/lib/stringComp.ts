@@ -52,8 +52,12 @@ export async function getStringScores(baseString: string, stringLst: string[]): 
         if (curStr === baseString) {
             return Number.MAX_SAFE_INTEGER;
         }
-        if (curStr.startsWith(baseString)) {
+        // Starting or ending with gets priority over including
+        if (curStr.startsWith(baseString) || curStr.endsWith(baseString)) {
             return Number.MAX_SAFE_INTEGER - 1;
+        }
+        if (curStr.includes(baseString)) {
+            return Number.MAX_SAFE_INTEGER - 2;
         }
         return getStringDifference(baseString, curStr);
     });

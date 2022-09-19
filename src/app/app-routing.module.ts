@@ -8,7 +8,6 @@ import { SearchComponent } from './pages/search/search.component';
 const routes: Routes = [
   { path: '', component: IndexComponent, data: { state: 'home' } },
   { path: 'search', component: SearchComponent, data: { state: 'search' } },
-  { path: 'entry', redirectTo: 'search', pathMatch: 'full' },
   { path: 'entry/:id', component: EntryComponent, data: { state: 'entry' } },
   { path: '**', component: FallbackComponent },
 ];

@@ -44,7 +44,7 @@ export class PokedexService {
       this.pokemonIdentifiers = JSON.parse(localStorage.getItem('pokemonNames') || "}{");
       this.filteredPokemons.next(this.pokemonIdentifiers);
       console.log("Pokemon names loaded from local storage");
-      this.nameFilterPokemons("Charizard"); // Initialize filteredPokemons
+      this.nameFilterPokemons(localStorage.getItem("search") || "Charizard"); // Initialize filteredPokemons
       return;
     } catch (error) {
       console.log("Error loading pokemon names from local storage");
@@ -58,7 +58,7 @@ export class PokedexService {
     localStorage.setItem('pokemonNames', JSON.stringify(this.pokemonIdentifiers));
     console.log("Pokemon names saved to local storage");
     this.filteredPokemons.next(this.pokemonIdentifiers);
-    this.nameFilterPokemons("Charizard"); // Initialize filteredPokemons
+    this.nameFilterPokemons(localStorage.getItem("search") || "Charizard"); // Initialize filteredPokemons
   }
 
   public nameFilterPokemons(name: string) {
@@ -82,28 +82,30 @@ export class PokedexService {
 
   public async implNameFilterPokemons(name: string) {
     localStorage.setItem("search", name);
-    // If str size is less than last str size, reset the list
-    if (name.length < this.lastStrSize || name.length === 0) {
-      this.filteredPokemons.next(this.pokemonIdentifiers);
-      console.log("Resetting list");
-      this.lastStrSize = name.length;
-      return;
-    }
-    this.lastStrSize = name.length;
-
     if (name.length === 0) {
       return;
     }
+    // If str size is less than last str size, reset the list
+    // if (name.length < this.lastStrSize) {
+    // this.filteredPokemons.next(this.pokemonIdentifiers);
+    // console.log("Resetting list");
+    // this.lastStrSize = name.length;
+    // await this.implNameFilterPokemons(name);
+    // return;
+    // }
+    this.lastStrSize = name.length;
+
+
     localStorage.setItem("search", name);
 
-    let pokemons = this.filteredPokemons.getValue();
+    let pokemons = this.pokemonIdentifiers;
     let scores = await getStringScores(name, pokemons);
     let sortedScores = scores.map((score, index) => [score, index]).sort((a, b) => b[0] - a[0]);
     let res = sortedScores.map((score, _) => pokemons[score[1]]);
     // Only show pokemons with a score of 0.5 or higher
     let result = [];
     for (let i = 0; i < res.length; i++) {
-      if (sortedScores[i][0] >= 0.15) {
+      if (sortedScores[i][0] >= 0.25) {
         result.push(res[i]);
       } else {
         break;

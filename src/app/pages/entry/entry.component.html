@@ -1,6 +1,6 @@
-<div class="h-full flex flex-col sm:flex-row">
+<div class="grid grid-cols-1 sm:grid-cols-2 h-full">
   <!-- Left -->
-  <div class="flex flex-col flex-1 grid-cols-1 card-gradient">
+  <div class="sidebar flex flex-col flex-1 grid-cols-1 card-gradient">
     <!-- Left top bar -->
     <div class="flex p-2 bg-gray-100/30 h-min max-h-screen">
       <!-- Left -->
@@ -9,7 +9,9 @@
       <span
         class="flex-1 whitespace-nowrap justify-center m-auto text-white text-lg font-bold"
       >
-        <span> Raikou </span>
+        <span>
+          {{ pokedex.identifierToReadableName(this.pokemonName) }}
+        </span>
         <span class="bg-red-300 p-1 rounded-md text-sm text-white"
           >&nbsp; FIRE &nbsp;
         </span>
@@ -21,18 +23,25 @@
       </div>
     </div>
     <!-- Pokemon preview -->
-    <div class="flex-1 flex justify-center align-middle bg-red-100">
+    <div class="flex-1 flex justify-center align-middle">
       <img
-        class="object-contain p-4"
-        src="https://img.pokemondb.net/sprites/home/normal/raikou.png"
+        class="object-contain p-4 pixelated"
+        loading="lazy"
+        src="{{
+          this.pokemon
+            ? this.pokemon.sprites.front_default || '/assets/img/MISSINGNO.webp'
+            : '/assets/img/MISSINGNO.webp'
+        }}"
         alt="Photo
-        of a Raikou"
+        of a {{ pokedex.identifierToReadableName(this.pokemonName) }}"
       />
     </div>
-    <div>stuff</div>
   </div>
   <!-- Right -->
   <div class="flex-1">
+    <div class="h-24 w-24 bg-white"></div>
+    <div class="h-24 w-24 bg-white"></div>
+    <div class="h-24 w-24 bg-white"></div>
     <!-- Stats: HP, Attack, defence Sp. Atk, Sp. Def, Speed, Total -->
     <!-- Use a 2 by 6 grid -->
     <div
