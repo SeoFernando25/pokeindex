@@ -11,16 +11,22 @@
   <!-- Locale switch -->
   <app-locale-toggle></app-locale-toggle>
   <!-- Search Bar -->
-  <mat-form-field appearance="standard" class="flex-1">
+
+  <mat-form-field appearance="standard" class="flex-1" (ngSubmit)="onSubmit()">
     <mat-label>Pokémon name</mat-label>
     <span matPrefix class="fa-solid fa-magnifying-glass">&nbsp;</span>
     <input
+      #searchInput
       matInput
       aria-label="Pokemon Name or Number"
       [value]="searchValue"
       (input)="onInput($event)"
       (change)="onInput($event)"
       (focus)="onFocus()"
+      (keydown.enter)="onSubmit()"
     />
+    <div matSuffix class="py-4">
+      <span class="kbd">/</span>
+    </div>
   </mat-form-field>
 </nav>

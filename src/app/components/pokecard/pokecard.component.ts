@@ -26,7 +26,7 @@ export class PokecardComponent implements OnInit {
 
   onClick() {
     console.log("Clicked on " + this.pokemonName);
-    this.router.navigate(['/entry', this.pokemonName]);
+    this.router.navigate(['/pokemon/', this.pokemonName]);
   }
 
 

@@ -1,31 +1,43 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 h-full">
   <!-- Left -->
-  <div class="sidebar flex flex-col flex-1 grid-cols-1 card-gradient">
+  <div
+    class="sidebar flex flex-col flex-1 grid-cols-1 card-gradient min-h-screen"
+  >
     <!-- Left top bar -->
-    <div class="flex p-2 bg-gray-100/30 h-min max-h-screen">
+    <div #left class="flex p-2 bg-gray-100/30 h-min max-h-screen text-white">
       <!-- Left -->
-      <div class="flex-1"></div>
+      <div
+        class="flex-1 font-bold m-auto text-white text-center align-middle p-1 rounded-md text-lg uppercase break-words"
+      >
+        <span class="fa-solid fa-egg align-middle">&nbsp;</span>
+        <span class="text-xs align-middle">
+          {{ this.eggGroups.join(", ") || "?" }}
+        </span>
+      </div>
       <!-- Middle -->
       <span
-        class="flex-1 whitespace-nowrap justify-center m-auto text-white text-lg font-bold"
+        class="flex-1 whitespace-nowrap self-center m-auto text-lg font-bold gap-2 flex"
       >
         <span>
           {{ pokedex.identifierToReadableName(this.pokemonName) }}
         </span>
-        <span class="bg-red-300 p-1 rounded-md text-sm text-white"
-          >&nbsp; FIRE &nbsp;
-        </span>
+        <app-typelabel
+          *ngFor="let TName of this.pokemon?.types"
+          typeName="{{ TName.type.name }}"
+        ></app-typelabel>
       </span>
       <!-- Right -->
-      <div class="flex-1 text-end text-lg">
+      <div class="flex-1 text-lg text-center self-center">
         <span class="fa-solid fa-weight-hanging text-white"></span>
-        <span class="text-white text-bold"> 69.0 </span>
+        <span class="text-white text-bold">
+          {{ this.pokemon?.weight || "?" }}
+        </span>
       </div>
     </div>
     <!-- Pokemon preview -->
     <div class="flex-1 flex justify-center align-middle">
       <img
-        class="object-contain p-4 pixelated"
+        class="object-contain p-4 pixelated w-full h-auto"
         loading="lazy"
         src="{{
           this.pokemon
@@ -39,9 +51,6 @@
   </div>
   <!-- Right -->
   <div class="flex-1">
-    <div class="h-24 w-24 bg-white"></div>
-    <div class="h-24 w-24 bg-white"></div>
-    <div class="h-24 w-24 bg-white"></div>
     <!-- Stats: HP, Attack, defence Sp. Atk, Sp. Def, Speed, Total -->
     <!-- Use a 2 by 6 grid -->
     <div
@@ -57,31 +66,37 @@
         <h4>HP</h4>
       </div>
       <div class="bg-red-300 shadow-lg">
-        <h4>90</h4>
+        <h4>{{ getStatStr("hp") }}</h4>
       </div>
       <div class="bg-orange-500 text-white">
         <h4>Attack</h4>
       </div>
       <div class="bg-orange-300">
-        <h4>85</h4>
+        <h4>{{ getStatStr("attack") }}</h4>
       </div>
       <div class="bg-yellow-500 text-white">
         <h4>Defence</h4>
       </div>
       <div class="bg-yellow-300">
-        <h4>75</h4>
+        <h4>{{ getStatStr("defense") }}</h4>
       </div>
       <div class="bg-blue-500 text-white">
         <h4>Sp. Atk</h4>
       </div>
       <div class="bg-blue-300 text">
-        <h4>115</h4>
+        <h4>{{ getStatStr("special-attack") }}</h4>
       </div>
       <div class="bg-green-500 text-white">
         <h4>Sp. Def</h4>
       </div>
       <div class="bg-green-300">
-        <h4>100</h4>
+        <h4>{{ getStatStr("special-defense") }}</h4>
+      </div>
+      <div class="bg-pink-500 text-white">
+        <h4>Speed</h4>
+      </div>
+      <div class="bg-pink-300">
+        <h4>{{ getStatStr("speed") }}</h4>
       </div>
     </div>
   </div>

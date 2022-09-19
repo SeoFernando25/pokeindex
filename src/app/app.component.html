@@ -1,14 +1,6 @@
 <div class="wrapper">
-  <div>
-    <app-titlebar></app-titlebar>
-  </div>
-  <main
-    class="flex-1"
-    [@anyHome]="getState(o)"
-    [@homeSearch]="getState(o)"
-    [@searchEntry]="getState(o)"
-    [@entrySearch]="getState(o)"
-  >
-    <router-outlet #o="outlet"></router-outlet>
+  <app-titlebar></app-titlebar>
+  <main class="flex-1">
+    <router-outlet></router-outlet>
   </main>
 </div>

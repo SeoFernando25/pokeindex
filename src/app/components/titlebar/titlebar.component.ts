@@ -1,4 +1,5 @@
-import { ApplicationRef, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { AfterViewChecked, ApplicationRef, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { getStringScores } from 'src/app/lib/stringComp';
 import { PokedexService } from 'src/app/services/pokedex.service';
@@ -9,6 +10,7 @@ import { PokedexService } from 'src/app/services/pokedex.service';
   styleUrls: ['./titlebar.component.scss']
 })
 export class TitlebarComponent implements OnInit {
+  @ViewChild('searchInput') searchRef: ElementRef | null = null;
   public lastStrSize = 0;
   public searchValue: string = "";
 
@@ -20,6 +22,21 @@ export class TitlebarComponent implements OnInit {
   ngOnInit(): void {
     // Check if there is a hash in the url
     this.searchValue = localStorage.getItem("search") || "";
+    // On press "/" focus on search bar
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "/" && this.searchRef) {
+        window.scrollTo(0, 0);
+        this.searchRef.nativeElement.focus();
+        // Remove the last character from the search bar
+        // HACK: For some reason, even after returning false, the mat-input still consumes the "/" character
+        setTimeout(() => {
+          if (this.searchRef) {
+            this.searchRef.nativeElement.value = this.searchRef.nativeElement.value.slice(0, -1);
+          }
+        }, 0);
+      }
+    });
+
   }
 
   public onFocus() {
@@ -32,5 +49,16 @@ export class TitlebarComponent implements OnInit {
 
   public onInput(event: any) {
     this.pokedex.nameFilterPokemons(event.target.value as string);
+  }
+
+  public onSubmit() {
+    console.log("Submitted");
+    let pokemonsResult = this.pokedex.filteredPokemons.getValue();
+    // If there are no results, do nothing
+    if (pokemonsResult.length === 0) {
+      return;
+    }
+    // If there is more than one result, redirect to it
+    this.router.navigate(["/pokemon", pokemonsResult[0]]);
   }
 }

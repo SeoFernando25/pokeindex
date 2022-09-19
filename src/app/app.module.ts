@@ -24,6 +24,7 @@ import { LocaleToggleComponent } from './components/locale-toggle/locale-toggle.
 import { SearchComponent } from './pages/search/search.component';
 import { PokecardComponent } from './components/pokecard/pokecard.component';
 import { EntryComponent } from './pages/entry/entry.component';
+import { TypelabelComponent } from './components/typelabel/typelabel.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,6 +40,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SearchComponent,
     PokecardComponent,
     EntryComponent,
+    TypelabelComponent,
   ],
   imports: [
     BrowserModule,

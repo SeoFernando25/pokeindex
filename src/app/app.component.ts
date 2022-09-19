@@ -2,20 +2,10 @@ import { ChildrenOutletContexts, RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Component } from '@angular/core';
-import { rotateCubeToLeft, fromLeftEasing, fromRightEasing } from "ngx-router-animations";
-import { transition, trigger, useAnimation } from '@angular/animations';
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [
-    trigger('anyHome', [transition('* => home', useAnimation(fromLeftEasing))]),
-    trigger('homeSearch', [transition('home => search', useAnimation(fromRightEasing))]),
-    trigger('searchEntry', [transition('search => entry', useAnimation(fromRightEasing))]),
-    trigger('entrySearch', [transition('entry => search', useAnimation(fromLeftEasing))]),
-  ]
 })
 export class AppComponent {
 
