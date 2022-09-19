@@ -50,7 +50,10 @@ export class PokedexService {
       console.log("Error loading pokemon names from local storage");
     }
 
+    // If not, load them from the API
     let pokemons = await this.client.pokemon.listPokemons(0, Number.MAX_SAFE_INTEGER);
+    // The pokemons with largest identifier are about 20 characters long (24 bytes)
+    // given that we have about 1200 pokemons, we only have to transfer ~24kb initially
 
 
     // Save readable pokemon names to localStorage
@@ -85,14 +88,7 @@ export class PokedexService {
     if (name.length === 0) {
       return;
     }
-    // If str size is less than last str size, reset the list
-    // if (name.length < this.lastStrSize) {
-    // this.filteredPokemons.next(this.pokemonIdentifiers);
-    // console.log("Resetting list");
-    // this.lastStrSize = name.length;
-    // await this.implNameFilterPokemons(name);
-    // return;
-    // }
+
     this.lastStrSize = name.length;
 
 

@@ -15,9 +15,10 @@ export class EntryComponent implements AfterViewChecked {
   pokemonName: string;
 
   constructor(public pokedex: PokedexService, public router: Router) {
-    this.pokemonName = window.location.pathname.split('/')[2];
+    this.pokemonName = window.location.pathname.split('/')[2]; // It initially might be an id or a name
     this.pokedex.client.pokemon.getPokemonByName(this.pokemonName).then((pokemon: Pokemon) => {
       this.pokemon = pokemon;
+      this.pokemonName = this.pokemon.name; // Update to proper name in case it was an id
       console.log(pokemon);
 
       this.pokedex.client.pokemon.getPokemonSpeciesByName(this.pokemon.species.name).then((species) => {

@@ -25,7 +25,7 @@
 <!-- No cards found -->
 <!-- flex center horizontal and verical -->
 <div
-  class="flex justify-center flex-1 w-screen bg-red-50"
+  class="flex justify-center flex-1 w-screen"
   *ngIf="pokedex.filteredPokemons.getValue().slice(0, 50).length === 0"
 >
   <!-- Aling vertical -->
@@ -36,6 +36,7 @@
       src="/assets/img/MISSINGNO.webp"
       class="object-contain h-[50vh] pixelated"
     />
-    <span>A wild MISSINGNO appeared!</span>
+    <span>A wild MISSINGNO appeared!</span> <br />
+    <span>Try searching for something else, eg: Charizard</span>
   </div>
 </div>
