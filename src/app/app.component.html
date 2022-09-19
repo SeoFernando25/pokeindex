@@ -1,6 +1,11 @@
 <div class="wrapper">
   <app-titlebar></app-titlebar>
-  <main class="bg-gray-200 flex-1">
-    <router-outlet></router-outlet>
+
+  <main
+    class="bg-gray-200 flex-1"
+    [@fromLeftEasing]="getState(o)"
+    [@fromRightEasing]="getState(o)"
+  >
+    <router-outlet #o="outlet"></router-outlet>
   </main>
 </div>

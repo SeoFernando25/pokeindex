@@ -1,14 +1,25 @@
-import { Component } from '@angular/core';
+import { ChildrenOutletContexts, RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+
+import { Component } from '@angular/core';
+import { rotateCubeToLeft, fromLeftEasing, fromRightEasing } from "ngx-router-animations";
+import { transition, trigger, useAnimation } from '@angular/animations';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('fromLeftEasing', [transition('* => home', useAnimation(fromLeftEasing))]),
+    trigger('fromRightEasing', [transition('home => *', useAnimation(fromRightEasing))]),
+  ]
 })
 export class AppComponent {
+
   title = 'PokeIndex';
 
-  constructor(public translate: TranslateService) {
+  constructor(public translate: TranslateService, private contexts: ChildrenOutletContexts) {
     // Initial Locale setup
     translate.setDefaultLang('en');
     translate.addLangs(['en', 'fr']);
@@ -21,5 +32,9 @@ export class AppComponent {
       translate.use('en');
       localStorage.setItem('lang', 'en');
     }
+  }
+
+  getState(outlet: RouterOutlet) {
+    return outlet.activatedRouteData['state'];
   }
 }
