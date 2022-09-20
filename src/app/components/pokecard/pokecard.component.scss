@@ -38,20 +38,8 @@
 .card-sprite {
 	filter: saturate(200%);
 	background: radial-gradient(circle at center, currentColor , transparent 75%);
-	animation: pulsating 15s ease infinite;
 }
 
-@keyframes pulsating {
-	0% {
-		transform: scale(1);
-	}
-	50% {
-		transform: scale(1.01);
-	}
-	100% {
-		transform: scale(1);
-	}
-}
 
 
 
