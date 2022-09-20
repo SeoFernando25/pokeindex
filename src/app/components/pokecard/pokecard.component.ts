@@ -16,7 +16,7 @@ export class PokecardComponent implements OnInit {
 
   pokemon: Pokemon | null = null;
   species: PokemonSpecies | null = null;
-  cardColor = "bg-white";
+  cardColor = "white";
 
   constructor(public pokedex: PokedexService, public router: Router) {
   }

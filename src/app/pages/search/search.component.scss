@@ -1,5 +1,23 @@
+// Page layout
+
+.search-layout {
+    display: grid;
+    padding: 1rem;
+    grid-template-columns: 0.25fr 1fr;
+    grid-column-gap: 10px;
+}
+
+@media (max-width: --sm) {
+    .search-layout {
+        grid-template-columns: 1fr;
+    }
+}
+    
+
+
 // Grid with auto number of rows to fit 250px wide cards
 .card-list-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, 150px);
 }
+

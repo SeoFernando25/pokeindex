@@ -16,6 +16,47 @@
 	}
 }
 
+
+.card-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url("^assets/img/sparkles.webp");
+	background-position: 50% 50%;
+	background-size: 160%;
+	background-blend-mode: overlay;
+	z-index: 2;
+	filter: brightness(1) contrast(1);
+	transition: all .33s ease;
+	mix-blend-mode: color-dodge;
+	opacity: .75;
+}
+
+// circle gradient comming from center
+.card-sprite {
+	filter: saturate(200%);
+	background: radial-gradient(circle at center, currentColor , transparent 75%);
+	animation: pulsating 15s ease infinite;
+}
+
+@keyframes pulsating {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.01);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+
+
+
+
 // Card label
 .card-label-bg {
 	background: linear-gradient(to right, #DC281E, #F00000);
@@ -36,9 +77,11 @@
 
 // Override badge size
 .mat-badge-content {
-	width: 40px;
-	height: 40px;
-	line-height: 40px;
+	margin-right: 1rem;
+	margin-top: 1rem;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
 	background: rgb(255,87,63);
 	background: radial-gradient(circle,  #DC281E 0%, #F00000 100%);
 }

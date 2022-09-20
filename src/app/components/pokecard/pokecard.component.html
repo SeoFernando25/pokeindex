@@ -1,19 +1,20 @@
 <div
   (click)="onClick()"
-  class="grid p-2 w-[150px] h-[245px] card-gradient rounded-xl transform transition hover:scale-110 cursor-pointer select-none"
+  class="grid p-2 w-[150px] h-[245px] card-gradient rounded-xl transform transition hover:scale-110 cursor-pointer select-none overflow-hidden"
   matBadge="#{{ this.displayNumber || '?' }}"
-  matBadgePosition="before"
+  matBadgePosition="after"
   matBadgeColor="primary"
 >
   <!-- Card Header (img) -->
   <div
-    class="bg-{{ this.cardColor }}-500
-  bg-{{ this.cardColor }}
-  bg-opacity-15
-  rounded-t-lg w-full"
+    [style]="'color:' + this.cardColor + ';'"
+    class="rounded-t-lg w-full bg-blue-300/20"
   >
+    <div class="card-bg"></div>
+    <!-- w-[90%] h-auto min-h-[50%] object-contain -->
     <img
-      class="p-2 m-auto w-[90%] h-auto min-h-[50%] object-contain"
+      class="card-sprite p-2 m-auto w-[90%] h-auto min-h-[50%] object-contain"
+      fetchpriority="low"
       src="{{
         this.pokemon
           ? this.pokemon.sprites.front_default || '/assets/img/MISSINGNO.webp'
