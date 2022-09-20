@@ -9,7 +9,7 @@ import { PokedexService } from 'src/app/services/pokedex.service';
   styleUrls: ['./entry.component.scss']
 })
 export class EntryComponent implements AfterViewChecked {
-  @ViewChild('left') pokemonViewRef: ElementRef | null = null;
+  @ViewChild('pokemonViewRef') pokemonViewRef: ElementRef | null = null;
   pokemon: Pokemon | null = null;
   eggGroups: string[] = [];
   pokemonName: string;
@@ -40,7 +40,9 @@ export class EntryComponent implements AfterViewChecked {
   ngAfterViewChecked(): void {
     if (this.pokemonViewRef && !this.initScroll) {
       this.initScroll = true;
-      this.pokemonViewRef.nativeElement.scrollIntoView();
+      window.scrollTo(0, this.pokemonViewRef.nativeElement.offsetTop);
+      // this.pokemonViewRef.nativeElement.scrollTop = 100;
+      // this.pokemonViewRef.nativeElement.scrollIntoView();
     }
   }
 
