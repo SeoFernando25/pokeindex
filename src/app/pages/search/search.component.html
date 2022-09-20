@@ -28,6 +28,21 @@
     class="p-2 flex-1"
     *ngIf="this.localFilteredPokemons.slice(0, 50).length !== 0"
   >
+    <div class="text-lg" *ngIf="!isPrevQueryQuoted()">
+      Did you mean
+      <a
+        class="underline text-bold text-blue-500"
+        routerLink="/search/&quot;{{
+          this.pokedex.identifierToReadableName(this.localFilteredPokemons[0])
+        }}&quot;"
+      >
+        {{
+          this.pokedex.identifierToReadableName(this.localFilteredPokemons[0])
+        }}
+      </a>
+      ?
+    </div>
+    <br />
     <div
       class="card-list-container self-center ml-0 mr-0 mt-0 justify-center gap-4"
     >

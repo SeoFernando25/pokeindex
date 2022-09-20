@@ -94,6 +94,17 @@ export class PokedexService {
 
 
     localStorage.setItem("search", name);
+    this.previousSearch = name;
+
+    // If search string is quoted, search for contains match
+    if (name.startsWith('"') && name.endsWith('"')) {
+      name = name.slice(1, name.length - 1);
+      this.filteredPokemons.next(
+        this.pokemonIdentifiers.filter((pokemon) =>
+          this.identifierToReadableName(pokemon)
+            .toLowerCase().includes(name.toLowerCase())));
+      return;
+    }
 
     let pokemons = this.pokemonIdentifiers;
     let scores = await getStringScores(name, pokemons);

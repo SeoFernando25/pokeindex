@@ -21,8 +21,11 @@ export class SearchComponent {
     let routeParts = this.route.url.split("/");
     // Check if last part is a not "search" and not empty
     if (routeParts[routeParts.length - 1] !== "search" && routeParts[routeParts.length - 1] !== "") {
-      console.log("Searching for " + routeParts[routeParts.length - 1]);
-      this.pokedex.nameFilterPokemons(routeParts[routeParts.length - 1]);
+      let routerSearchQuery = routeParts[routeParts.length - 1];
+      routerSearchQuery = decodeURIComponent(routerSearchQuery);
+      // Convert url to readable name using uridecode
+      console.log("Searching for " + routerSearchQuery);
+      this.pokedex.nameFilterPokemons(routerSearchQuery);
     }
 
     let types = Object.values(Types);
@@ -84,6 +87,10 @@ export class SearchComponent {
       this.searchReloadFlag = false;
       this.doFilter();
     }
+  }
+
+  isPrevQueryQuoted() {
+    return this.pokedex.previousSearch.startsWith('"') && this.pokedex.previousSearch.endsWith('"');
   }
 
 }
