@@ -7,6 +7,7 @@
     <div #left class="flex p-2 bg-gray-100/30 h-min max-h-screen text-white">
       <!-- Left -->
       <div
+        matTooltip="Egg Group(s)"
         class="flex-1 font-bold m-auto text-white text-center align-middle p-1 rounded-md text-lg uppercase break-words"
       >
         <span class="fa-solid fa-egg align-middle">&nbsp;</span>
@@ -21,13 +22,13 @@
         <span>
           {{ pokedex.identifierToReadableName(this.pokemonName) }}
         </span>
-        <app-typelabel
+        <app-poketype
           *ngFor="let TName of this.pokemon?.types"
-          typeName="{{ TName.type.name }}"
-        ></app-typelabel>
+          pokemonType="{{ TName.type.name }}"
+        ></app-poketype>
       </span>
       <!-- Right -->
-      <div class="flex-1 text-lg text-center self-center">
+      <div class="flex-1 text-lg text-center self-center" matTooltip="Weight">
         <span class="fa-solid fa-weight-hanging text-white"></span>
         <span class="text-white text-bold">
           {{ this.pokemon?.weight || "?" }}
@@ -38,7 +39,6 @@
     <div class="flex-1 flex justify-center align-middle">
       <img
         class="object-contain p-4 pixelated w-full h-auto"
-        loading="lazy"
         src="{{
           this.pokemon
             ? this.pokemon.sprites.front_default || '/assets/img/MISSINGNO.webp'

@@ -1,11 +1,19 @@
 <div
   (click)="onClick()"
-  class="flex flex-col p-2 w-[150px] h-[245px] card-gradient rounded-xl transform transition hover:scale-110 cursor-pointer"
+  class="grid p-2 w-[150px] h-[245px] card-gradient rounded-xl transform transition hover:scale-110 cursor-pointer select-none"
+  matBadge="#{{ this.displayNumber || '?' }}"
+  matBadgePosition="before"
+  matBadgeColor="primary"
 >
-  <div class="bg-slate-300 rounded-t-lg w-full">
+  <!-- Card Header (img) -->
+  <div
+    class="bg-{{ this.cardColor }}-500
+  bg-{{ this.cardColor }}
+  bg-opacity-15
+  rounded-t-lg w-full"
+  >
     <img
       class="p-2 m-auto w-[90%] h-auto min-h-[50%] object-contain"
-      loading="lazy"
       src="{{
         this.pokemon
           ? this.pokemon.sprites.front_default || '/assets/img/MISSINGNO.webp'
@@ -15,9 +23,23 @@
     of a {{ pokedex.identifierToReadableName(this.pokemonName) }}"
     />
   </div>
-  <div class="bg-white rounded-b-lg p-2 flex-1 text-center">
-    <h4 class="text-lg font-bold">
+
+  <!-- Card Content num/name/etc -->
+  <!-- {{this.cardColor}}-300  -->
+  <div
+    class="card-content rounded-b-lg place-items-center font-bold text-md bg-gradient-to-r from-cyan-500 to-blue-500"
+  >
+    <div
+      class="card-content-top card-label-bg text-white p-1 h-min w-full text-center card-gradient justify-center align-middle flex"
+    >
       {{ pokedex.identifierToReadableName(this.pokemonName) }}
-    </h4>
+    </div>
+
+    <div class="card-content-bottom inline-flex flex-wrap gap-4">
+      <app-poketype
+        *ngFor="let TName of this.pokemon?.types"
+        pokemonType="{{ TName.type.name }}"
+      ></app-poketype>
+    </div>
   </div>
 </div>

@@ -8,6 +8,7 @@ import { SearchComponent } from './pages/search/search.component';
 const routes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'search', component: SearchComponent },
+  { path: 'search/:query', component: SearchComponent },
   { path: 'pokemon/:id', component: EntryComponent },
   { path: '**', component: FallbackComponent },
 ];

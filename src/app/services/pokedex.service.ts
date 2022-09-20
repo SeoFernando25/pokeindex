@@ -86,6 +86,7 @@ export class PokedexService {
   public async implNameFilterPokemons(name: string) {
     localStorage.setItem("search", name);
     if (name.length === 0) {
+      this.filteredPokemons.next(this.pokemonIdentifiers);
       return;
     }
 

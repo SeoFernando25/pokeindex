@@ -1,0 +1,11 @@
+<div
+  #label
+  class="icon {{ pokemonType }} select-none"
+  matTooltip="{{ pokemonType | uppercase }}"
+  (click)="onClick()"
+>
+  <img
+    src="assets/img/poketype/{{ pokemonType }}.svg"
+    alt="{{ pokemonType }} icon"
+  />
+</div>

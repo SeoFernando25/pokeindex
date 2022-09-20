@@ -1,7 +1,5 @@
-:host  {
-	width: 100%;
-    height: 90rem !important;
-    max-width: 100%;
-    max-height: 100%;
-    overflow: hidden !important;
+// Grid with auto number of rows to fit 250px wide cards
+.card-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 150px);
 }

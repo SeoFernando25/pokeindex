@@ -1,6 +1,7 @@
-import { AfterViewChecked, ApplicationRef, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, ApplicationRef, ChangeDetectorRef, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { getStringScores } from 'src/app/lib/stringComp';
 import { PokedexService } from 'src/app/services/pokedex.service';
 
@@ -9,11 +10,12 @@ import { PokedexService } from 'src/app/services/pokedex.service';
   templateUrl: './titlebar.component.html',
   styleUrls: ['./titlebar.component.scss']
 })
-export class TitlebarComponent implements OnInit {
+export class TitlebarComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput') searchRef: ElementRef | null = null;
   public lastStrSize = 0;
   public searchValue: string = "";
 
+  routerSubscription: Subscription | undefined;
 
 
   constructor(public pokedex: PokedexService, public router: Router) {
@@ -27,22 +29,39 @@ export class TitlebarComponent implements OnInit {
       if (event.key === "/" && this.searchRef) {
         window.scrollTo(0, 0);
         this.searchRef.nativeElement.focus();
+        this.searchValue = "";
+
         // Remove the last character from the search bar
         // HACK: For some reason, even after returning false, the mat-input still consumes the "/" character
         setTimeout(() => {
           if (this.searchRef) {
             this.searchRef.nativeElement.value = this.searchRef.nativeElement.value.slice(0, -1);
+            this.searchRef.nativeElement.select();
           }
         }, 0);
       }
     });
+  }
 
+  ngAfterViewInit(): void {
+    this.routerSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Reload the search bar text in case any changes were made
+        this.searchValue = localStorage.getItem("search") || this.pokedex.previousSearch;
+        this.searchValue = this.pokedex.identifierToReadableName(this.searchValue);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
   }
 
   public onFocus() {
     // If not on /search, redirect to /search
     if (this.router.url !== "/search") {
-      console.log("Redirecting to /search");
       this.router.navigate(["/search"]);
     }
   }

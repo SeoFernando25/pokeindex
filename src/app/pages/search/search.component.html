@@ -1,42 +1,60 @@
 <!-- 2 Horizontal flex boxes (Filter, Search) -->
-<div
-  class="flex flex-col sm:flex-row bg-purple-50"
-  *ngIf="pokedex.filteredPokemons.getValue().slice(0, 50).length !== 0"
->
+<div class="flex flex-col sm:flex-row">
   <!-- Search/Filters -->
-  <div class="p-4 flex-1 flex-row sm:max-w-[35%] bg-blue-100">
-    TODO: Add search filters
+  <div class="p-4 flex-1 flex-row sm:max-w-[25%]">
+    <h1>Filters</h1>
+    <h2>Pokemon Types:</h2>
+    <div class="flex flex-wrap gap-4">
+      <div *ngFor="let TName of this.pokemonTypesList">
+        <label for="{{ TName }}-checkbox" class="label-example">
+          <app-poketype-checkbox
+            pokemonType="{{ TName }}"
+            [isChecked]="true"
+          ></app-poketype-checkbox
+        ></label>
+        <input
+          type="checkbox"
+          id="{{ TName }}-checkbox"
+          class="hidden"
+          checked
+          (click)="onToggleTypeFilter($event, TName)"
+        />
+      </div>
+    </div>
   </div>
 
   <!-- Search Results -->
-  <div class="p-2 bg-red-200 flex-1">
-    <div class="self-center ml-0 mr-0 mt-0 flex flex-wrap justify-center gap-4">
+  <div
+    class="p-2 flex-1"
+    *ngIf="this.localFilteredPokemons.slice(0, 50).length !== 0"
+  >
+    <div
+      class="card-list-container self-center ml-0 mr-0 mt-0 justify-center gap-4"
+    >
       <!-- Pokemon Card list -->
       <app-pokecard
-        *ngFor="
-          let pokemonName of pokedex.filteredPokemons.getValue().slice(0, 50)
-        "
+        *ngFor="let pokemonName of this.localFilteredPokemons.slice(0, 50)"
         [pokemonName]="pokemonName"
       ></app-pokecard>
     </div>
   </div>
-</div>
 
-<!-- No cards found -->
-<!-- flex center horizontal and verical -->
-<div
-  class="flex justify-center flex-1 w-screen"
-  *ngIf="pokedex.filteredPokemons.getValue().slice(0, 50).length === 0"
->
-  <!-- Aling vertical -->
-  <div class="grid grid-cols-1 gap-4 place-items-center">
-    <h1 class="bold">Nothing found!</h1>
-    <img
-      alt="MISSINGNO"
-      src="/assets/img/MISSINGNO.webp"
-      class="object-contain h-[50vh] pixelated"
-    />
-    <span>A wild MISSINGNO appeared!</span> <br />
-    <span>Try searching for something else, eg: Charizard</span>
+  <!-- No cards found -->
+  <!-- flex center horizontal and verical -->
+  <div
+    class="flex justify-center flex-1 w-screen"
+    *ngIf="this.localFilteredPokemons.slice(0, 50).length === 0"
+  >
+    <!-- Aling vertical -->
+    <div class="grid grid-cols-1 gap-4 place-items-center">
+      <h1 class="bold">Nothing found!</h1>
+      <img
+        (click)="randomPokemon()"
+        alt="MISSINGNO"
+        src="/assets/img/MISSINGNO.webp"
+        class="object-contain h-[50vh] pixelated cursor-pointer"
+      />
+      <span>A wild MISSINGNO appeared!</span> <br />
+    </div>
   </div>
 </div>
