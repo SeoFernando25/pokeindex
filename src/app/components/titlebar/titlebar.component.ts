@@ -27,7 +27,8 @@ export class TitlebarComponent implements OnInit, OnDestroy {
     // On press "/" focus on search bar
     document.addEventListener("keydown", (event) => {
       if (event.key === "/" && this.searchRef) {
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0); (This does not work on webKit)
+        this.searchRef.nativeElement.scrollTop = 100;
         this.searchRef.nativeElement.focus();
         this.searchValue = "";
 
