@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 // Assets taken from 
@@ -8,14 +8,10 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './poketype.component.html',
   styleUrls: ['./poketype.component.scss']
 })
-export class PoketypeComponent implements OnInit {
+export class PoketypeComponent {
   @Input() pokemonType: string = "";
 
   constructor(public translate: TranslateService) {
 
   }
-
-  ngOnInit(): void {
-  }
-
 }

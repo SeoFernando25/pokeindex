@@ -1,5 +1,5 @@
-import { Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
-import { Pokedex, Pokemon, PokemonSpecies } from 'pokenode-ts';
+import { Component, Input, OnInit } from '@angular/core';
+import { Pokemon, PokemonSpecies } from 'pokenode-ts';
 import { PokedexService } from 'src/app/services/pokedex.service';
 
 import { Router } from '@angular/router';

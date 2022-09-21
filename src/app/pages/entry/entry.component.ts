@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Pokemon, PokemonSpecies } from 'pokenode-ts';
@@ -35,9 +35,6 @@ export class EntryComponent implements AfterViewChecked {
         this.router.navigate(['/404']);
       }
     });
-
-    // Scroll to top on load
-
   }
 
   initScroll: boolean = false;
@@ -45,8 +42,6 @@ export class EntryComponent implements AfterViewChecked {
     if (this.pokemonViewRef && !this.initScroll) {
       this.initScroll = true;
       window.scrollTo(0, this.pokemonViewRef.nativeElement.offsetTop);
-      // this.pokemonViewRef.nativeElement.scrollTop = 100;
-      // this.pokemonViewRef.nativeElement.scrollIntoView();
     }
   }
 

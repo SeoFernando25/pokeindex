@@ -1,4 +1,4 @@
-import { ChildrenOutletContexts, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Component } from '@angular/core';
@@ -9,9 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  title = 'PokeIndex';
-
-  constructor(public translate: TranslateService, private contexts: ChildrenOutletContexts) {
+  constructor(public translate: TranslateService) {
     // Initial Locale setup
     translate.setDefaultLang('en');
     translate.addLangs(['en', 'fr']);
