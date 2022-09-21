@@ -31,6 +31,7 @@ specifiers:
   '@types/jasmine': ~4.3.0
   '@types/node': ^18.7.18
   autoprefixer: ^10.4.11
+  axios: ^0.27.2
   babel-loader: ^8.2.5
   jasmine-core: ~4.4.0
   karma: ~6.4.0
@@ -61,6 +62,7 @@ dependencies:
   '@fortawesome/fontawesome-free': 6.2.0
   '@ngx-translate/core': 14.0.0_i7tktysnynbuwpamqlvgeyyawi
   '@ngx-translate/http-loader': 7.0.0_ocph3yxhientx6pm47ufqn3bsy
+  axios: 0.27.2
   ngx-checkbox: 1.0.1_ici7bxm3f3ipt7voeaylpzxsu4
   pokenode-ts: 1.17.0
   rxjs: 7.5.6

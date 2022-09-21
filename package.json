@@ -26,6 +26,7 @@
     "@fortawesome/fontawesome-free": "^6.2.0",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
+    "axios": "^0.27.2",
     "ngx-checkbox": "^1.0.1",
     "pokenode-ts": "^1.17.0",
     "rxjs": "^7.5.6",
