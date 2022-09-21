@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { stat } from 'fs';
+import { TranslateService } from '@ngx-translate/core';
 import { Types } from 'pokenode-ts';
 import { PokedexService } from 'src/app/services/pokedex.service';
 
@@ -13,26 +13,26 @@ export class SearchComponent {
   typeFilter: Set<string> = new Set();
 
 
-  localFilteredPokemons: string[] = [];
+  localFilteredPokemon: string[] = [];
   pokemonTypesList: string[] = [];
 
-  constructor(public pokedex: PokedexService, public route: Router) {
+  constructor(public pokedex: PokedexService, public route: Router, public translate: TranslateService) {
     // Check if route has a query parameter -> search/:query
     let routeParts = this.route.url.split("/");
     // Check if last part is a not "search" and not empty
     if (routeParts[routeParts.length - 1] !== "search" && routeParts[routeParts.length - 1] !== "") {
       let routerSearchQuery = routeParts[routeParts.length - 1];
       routerSearchQuery = decodeURIComponent(routerSearchQuery);
-      // Convert url to readable name using uridecode
+      // Convert url to readable name using decodeURIComponent
       console.log("Searching for " + routerSearchQuery);
-      this.pokedex.nameFilterPokemons(routerSearchQuery);
+      this.pokedex.nameFilterPokemon(routerSearchQuery);
     }
 
     let types = Object.values(Types);
     // Filter only strings and convert to lowercase
     this.pokemonTypesList = types.filter((type) => typeof type === "string").map((type) => (type as string).toLowerCase());
-    this.pokedex.filteredPokemons.subscribe((pokemons) => {
-      this.localFilteredPokemons = pokemons;
+    this.pokedex.filteredPokemon.subscribe((pokemons) => {
+      this.localFilteredPokemon = pokemons;
       this.doFilter();
     });
   }
@@ -40,7 +40,7 @@ export class SearchComponent {
   randomPokemon() {
     console.log("Searching for random pokemon");
     let randomPokemon = this.pokedex.pokemonIdentifiers[Math.floor(Math.random() * this.pokedex.pokemonIdentifiers.length)];
-    this.pokedex.nameFilterPokemons(randomPokemon);
+    this.pokedex.nameFilterPokemon(randomPokemon);
     this.pokedex.previousSearch = randomPokemon;
     this.pokedex.nextSearchTask = randomPokemon;
     localStorage.setItem("search", randomPokemon);
@@ -72,7 +72,7 @@ export class SearchComponent {
 
     this.isSearching = true;
     // Initial name filter
-    let res = this.pokedex.filteredPokemons.getValue();
+    let res = this.pokedex.filteredPokemon.getValue();
     // Filter by type
     for (let type of this.typeFilter) {
       for (let pokemon of res) {
@@ -81,7 +81,7 @@ export class SearchComponent {
         }
       }
     }
-    this.localFilteredPokemons = res;
+    this.localFilteredPokemon = res;
     this.isSearching = false;
     if (this.searchReloadFlag) {
       this.searchReloadFlag = false;
@@ -92,7 +92,7 @@ export class SearchComponent {
   canShowSuggest() {
     let prevQuoted = this.pokedex.previousSearch.startsWith('"') && this.pokedex.previousSearch.endsWith('"');
 
-    let nameToSuggest = this.pokedex.identifierToReadableName(this.localFilteredPokemons[0]);
+    let nameToSuggest = this.pokedex.identifierToReadableName(this.localFilteredPokemon[0]);
     let inputBoxName = this.pokedex.previousSearch;
 
     // Check if: search is not quoted, search is not empty, search is not equal to the first pokemon in the list

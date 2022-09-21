@@ -1,8 +1,7 @@
-import { AfterViewChecked, ApplicationRef, ChangeDetectorRef, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { getStringScores } from 'src/app/lib/stringComp';
 import { PokedexService } from 'src/app/services/pokedex.service';
 
 @Component({
@@ -18,7 +17,7 @@ export class TitlebarComponent implements OnInit, OnDestroy {
   routerSubscription: Subscription | undefined;
 
 
-  constructor(public pokedex: PokedexService, public router: Router) {
+  constructor(public pokedex: PokedexService, public router: Router, public translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -68,12 +67,12 @@ export class TitlebarComponent implements OnInit, OnDestroy {
   }
 
   public onInput(event: any) {
-    this.pokedex.nameFilterPokemons(event.target.value as string);
+    this.pokedex.nameFilterPokemon(event.target.value as string);
   }
 
   public onSubmit() {
     console.log("Submitted");
-    let pokemonsResult = this.pokedex.filteredPokemons.getValue();
+    let pokemonsResult = this.pokedex.filteredPokemon.getValue();
     // If there are no results, do nothing
     if (pokemonsResult.length === 0) {
       return;

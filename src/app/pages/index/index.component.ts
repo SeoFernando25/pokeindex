@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
 })
 export class IndexComponent {
 
-  constructor() { }
+  constructor(public translate: TranslateService) { }
 
 
 }

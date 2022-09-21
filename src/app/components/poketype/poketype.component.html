@@ -1,4 +1,7 @@
-<div class="icon {{ pokemonType }}" matTooltip="{{ pokemonType | uppercase }}">
+<div
+  class="icon {{ pokemonType }}"
+  matTooltip="{{ pokemonType | translate | uppercase }}"
+>
   <img
     src="assets/img/poketype/{{ pokemonType }}.svg"
     alt="{{ pokemonType }} icon"

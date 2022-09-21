@@ -1,8 +1,8 @@
 <div
-  #label
+  [class.checked]="isChecked"
   class="icon {{ pokemonType }} select-none"
-  matTooltip="{{ pokemonType | uppercase }}"
-  (click)="onClick()"
+  matTooltip="{{ pokemonType | translate | uppercase }}"
+  (click)="this.isChecked = !this.isChecked"
 >
   <img
     src="assets/img/poketype/{{ pokemonType }}.svg"

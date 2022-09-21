@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 // Assets taken from 
 // https://github.com/duiker101/pokemon-type-svg-icons
@@ -10,7 +11,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 export class PoketypeComponent implements OnInit {
   @Input() pokemonType: string = "";
 
-  constructor() {
+  constructor(public translate: TranslateService) {
 
   }
 

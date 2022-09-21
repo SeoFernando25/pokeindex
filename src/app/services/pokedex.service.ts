@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MainClient } from "pokenode-ts";
 import { getStringScores } from '../lib/stringComp';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,11 +9,10 @@ export class PokedexService {
   public readonly client = new MainClient();
   public pokemonIdentifiers: string[] = [];
 
-  public filteredPokemons: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  public filteredPokemon: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   public previousSearch: string = "";
   public nextSearchTask: string | null = null;
   public searching: boolean = false;
-  private lastStrSize = 0;
 
   constructor() {
     this.initPokemonNames();
@@ -42,9 +41,9 @@ export class PokedexService {
     // Check if 'pokemonNames' is in local storage
     try {
       this.pokemonIdentifiers = JSON.parse(localStorage.getItem('pokemonNames') || "}{");
-      this.filteredPokemons.next(this.pokemonIdentifiers);
+      this.filteredPokemon.next(this.pokemonIdentifiers);
       console.log("Pokemon names loaded from local storage");
-      this.nameFilterPokemons(localStorage.getItem("search") || "Charizard"); // Initialize filteredPokemons
+      this.nameFilterPokemon(localStorage.getItem("search") || "Charizard"); // Initialize filteredPokemons
       return;
     } catch (error) {
       console.log("Error loading pokemon names from local storage");
@@ -60,11 +59,11 @@ export class PokedexService {
     this.pokemonIdentifiers = pokemons.results.map((pokemon) => pokemon.name);
     localStorage.setItem('pokemonNames', JSON.stringify(this.pokemonIdentifiers));
     console.log("Pokemon names saved to local storage");
-    this.filteredPokemons.next(this.pokemonIdentifiers);
-    this.nameFilterPokemons(localStorage.getItem("search") || "Charizard"); // Initialize filteredPokemons
+    this.filteredPokemon.next(this.pokemonIdentifiers);
+    this.nameFilterPokemon(localStorage.getItem("search") || "Charizard"); // Initialize filteredPokemons
   }
 
-  public nameFilterPokemons(name: string) {
+  public nameFilterPokemon(name: string) {
     if (this.searching) {
       console.log("Already searching");
       this.nextSearchTask = name;
@@ -87,18 +86,17 @@ export class PokedexService {
     localStorage.setItem("search", name);
     this.previousSearch = name;
     if (name.length === 0) {
-      this.filteredPokemons.next(this.pokemonIdentifiers);
+      this.filteredPokemon.next(this.pokemonIdentifiers);
       return;
     }
 
-    this.lastStrSize = name.length;
 
 
 
     // If search string is quoted, search for contains match
     if (name.startsWith('"') && name.endsWith('"')) {
       name = name.slice(1, name.length - 1);
-      this.filteredPokemons.next(
+      this.filteredPokemon.next(
         this.pokemonIdentifiers.filter((pokemon) =>
           this.identifierToReadableName(pokemon)
             .toLowerCase().includes(name.toLowerCase())));
@@ -121,6 +119,6 @@ export class PokedexService {
     }
 
 
-    this.filteredPokemons.next(result);
+    this.filteredPokemon.next(result);
   }
 }

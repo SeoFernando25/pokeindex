@@ -1,5 +1,6 @@
 import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Pokemon, PokemonSpecies } from 'pokenode-ts';
 import { PokedexService } from 'src/app/services/pokedex.service';
 
@@ -16,7 +17,7 @@ export class EntryComponent implements AfterViewChecked {
   pokemonName: string;
 
 
-  constructor(public pokedex: PokedexService, public router: Router) {
+  constructor(public pokedex: PokedexService, public router: Router, public translate: TranslateService) {
     this.pokemonName = window.location.pathname.split('/')[2]; // It initially might be an id or a name
     this.pokedex.client.pokemon.getPokemonByName(this.pokemonName).then((pokemon: Pokemon) => {
       this.pokemon = pokemon;

@@ -2,8 +2,8 @@
 <div class="search-layout block md:grid">
   <!-- Filters -->
   <div>
-    <h1>Filters</h1>
-    <h2>Pokemon Types:</h2>
+    <h1>{{ "search.filters" | translate }}</h1>
+    <h2>{{ "search.filter.type" | translate }}:</h2>
     <div class="flex flex-wrap gap-4">
       <div *ngFor="let TName of this.pokemonTypesList">
         <label for="{{ TName }}-checkbox" class="label-example">
@@ -26,29 +26,37 @@
   <!-- Search Results -->
   <div
     class="p-2 flex-1"
-    *ngIf="this.localFilteredPokemons.slice(0, 50).length !== 0"
+    *ngIf="this.localFilteredPokemon.slice(0, 50).length !== 0"
   >
     <div class="text-lg" *ngIf="canShowSuggest()">
       Did you mean
       <a
         class="underline text-bold text-blue-500"
         routerLink="/search/&quot;{{
-          this.pokedex.identifierToReadableName(this.localFilteredPokemons[0])
+          this.pokedex.identifierToReadableName(this.localFilteredPokemon[0])
         }}&quot;"
       >
         {{
-          this.pokedex.identifierToReadableName(this.localFilteredPokemons[0])
+          this.pokedex.identifierToReadableName(this.localFilteredPokemon[0])
         }}
       </a>
       ?
     </div>
     <br />
     <div
-      class="card-list-container self-center ml-0 mr-0 mt-0 justify-center gap-4"
+      class="
+        card-list-container
+        self-center
+        ml-0
+        mr-0
+        mt-0
+        justify-center
+        gap-4
+      "
     >
       <!-- Pokemon Card list -->
       <app-pokecard
-        *ngFor="let pokemonName of this.localFilteredPokemons.slice(0, 50)"
+        *ngFor="let pokemonName of this.localFilteredPokemon.slice(0, 50)"
         [pokemonName]="pokemonName"
       ></app-pokecard>
     </div>
@@ -58,7 +66,7 @@
   <!-- flex center horizontal and verical -->
   <div
     class="flex justify-center flex-1 w-screen"
-    *ngIf="this.localFilteredPokemons.slice(0, 50).length === 0"
+    *ngIf="this.localFilteredPokemon.slice(0, 50).length === 0"
   >
     <!-- Aling vertical -->
     <div class="grid grid-cols-1 gap-4 place-items-center">

@@ -1,5 +1,4 @@
 <div
-  [attr.data-card-color]="this.cardColor"
   (click)="onClick()"
   [style]="'color:' + this.cardColor + ';'"
   class="static shadow-xl grid p-2 w-[150px] h-[245px] {{
@@ -27,7 +26,14 @@
   <!-- Card Content num/name/etc -->
   <!-- {{this.cardColor}}-300  -->
   <div
-    class="card-content grid rounded-b-lg place-items-center text-md bg-gray-500/30"
+    class="
+      card-content
+      grid
+      rounded-b-lg
+      place-items-center
+      text-md
+      bg-gray-500/30
+    "
   >
     <div class="card-content-top p-1 h-full w-full text-center font-extrabold">
       {{ pokedex.identifierToReadableName(this.pokemonName) }}

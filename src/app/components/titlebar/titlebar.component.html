@@ -1,7 +1,19 @@
 <!-- Fine example for reference -->
 <!-- https://flowbite.com/docs/components/navbar/ -->
 <nav
-  class="p-4 w-full bg-white self-center inline-flex flex-wrap justify-center items-center gap-4 z-10 overflow-hidden"
+  class="
+    p-4
+    w-full
+    bg-white
+    self-center
+    inline-flex
+    flex-wrap
+    justify-center
+    items-center
+    gap-4
+    z-10
+    overflow-hidden
+  "
 >
   <!-- Logo -->
   <a routerLink="/" class="flex items-center select-none gap-4">
@@ -17,7 +29,7 @@
   <!-- Search Bar -->
 
   <mat-form-field appearance="standard" class="flex-1" (ngSubmit)="onSubmit()">
-    <mat-label>Pokémon name</mat-label>
+    <mat-label>{{ "search.description" | translate }}</mat-label>
     <span matPrefix class="fa-solid fa-magnifying-glass">&nbsp;</span>
     <input
       #searchInput

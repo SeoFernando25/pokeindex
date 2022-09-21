@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class PokecardComponent implements OnInit {
 
   @Input() pokemonName: string = "";
-  displayNumber: number | null = null;
+  protected displayNumber: number | null = null;
 
   pokemon: Pokemon | null = null;
   species: PokemonSpecies | null = null;
