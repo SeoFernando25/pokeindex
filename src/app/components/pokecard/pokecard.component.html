@@ -10,8 +10,7 @@
   matBadgeColor="primary"
 >
   <!-- Card Header (img) -->
-  <div class="rounded-t-lg w-full card-sprite-container">
-    <span class="card-bg rounded-t-lg"></span>
+  <div class="rounded-t-lg w-full card-sprite-container bg-white/30">
     <img
       class="card-sprite p-2 m-auto w-[90%] h-auto min-h-[50%] object-contain"
       fetchpriority="low"
@@ -28,12 +27,9 @@
   <!-- Card Content num/name/etc -->
   <!-- {{this.cardColor}}-300  -->
   <div
-    class="card-content rounded-b-lg place-items-center font-bold text-md bg-gray-500/30"
+    class="card-content grid rounded-b-lg place-items-center text-md bg-gray-500/30"
   >
-    <div
-      [style]="'background:' + this.cardColor + ';'"
-      class="card-content-top card-label-bg p-1 h-min w-full text-center justify-center align-middle flex"
-    >
+    <div class="card-content-top p-1 h-full w-full text-center font-extrabold">
       {{ pokedex.identifierToReadableName(this.pokemonName) }}
     </div>
 

@@ -85,6 +85,7 @@ export class PokedexService {
 
   public async implNameFilterPokemons(name: string) {
     localStorage.setItem("search", name);
+    this.previousSearch = name;
     if (name.length === 0) {
       this.filteredPokemons.next(this.pokemonIdentifiers);
       return;
@@ -93,8 +94,6 @@ export class PokedexService {
     this.lastStrSize = name.length;
 
 
-    localStorage.setItem("search", name);
-    this.previousSearch = name;
 
     // If search string is quoted, search for contains match
     if (name.startsWith('"') && name.endsWith('"')) {
@@ -108,18 +107,20 @@ export class PokedexService {
 
     let pokemons = this.pokemonIdentifiers;
     let scores = await getStringScores(name, pokemons);
+
     let sortedScores = scores.map((score, index) => [score, index]).sort((a, b) => b[0] - a[0]);
     let res = sortedScores.map((score, _) => pokemons[score[1]]);
     // Only show pokemons with a score of 0.5 or higher
     let result = [];
     for (let i = 0; i < res.length; i++) {
-      if (sortedScores[i][0] >= 0.25) {
+      if (sortedScores[i][0] >= 0.5) {
         result.push(res[i]);
       } else {
         break;
       }
     }
+
+
     this.filteredPokemons.next(result);
-    // console.log(sortedScores);
   }
 }

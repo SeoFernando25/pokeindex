@@ -89,8 +89,14 @@ export class SearchComponent {
     }
   }
 
-  isPrevQueryQuoted() {
-    return this.pokedex.previousSearch.startsWith('"') && this.pokedex.previousSearch.endsWith('"');
+  canShowSuggest() {
+    let prevQuoted = this.pokedex.previousSearch.startsWith('"') && this.pokedex.previousSearch.endsWith('"');
+
+    let nameToSuggest = this.pokedex.identifierToReadableName(this.localFilteredPokemons[0]);
+    let inputBoxName = this.pokedex.previousSearch;
+
+    // Check if: search is not quoted, search is not empty, search is not equal to the first pokemon in the list
+    return this.pokedex.previousSearch.length !== 0 && !prevQuoted && nameToSuggest.toLowerCase() !== inputBoxName.toLowerCase();
   }
 
 }

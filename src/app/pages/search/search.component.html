@@ -28,7 +28,7 @@
     class="p-2 flex-1"
     *ngIf="this.localFilteredPokemons.slice(0, 50).length !== 0"
   >
-    <div class="text-lg" *ngIf="!isPrevQueryQuoted()">
+    <div class="text-lg" *ngIf="canShowSuggest()">
       Did you mean
       <a
         class="underline text-bold text-blue-500"

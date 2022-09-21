@@ -1,9 +1,6 @@
 // Angular Material Theme
 @import "./theme.scss";
 
-// Gradients
-@import "./gradients.scss";
-
 // Tailwind setup
 @tailwind base;
 @tailwind components;
@@ -13,6 +10,11 @@
 @import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
 @import "@fortawesome/fontawesome-free/scss/solid.scss";
 // For more icons see https://fontawesome.com/docs/web/use-with/scss#get-set-up
+
+// ###################
+// User styles
+@import "./gradients.scss";
+@import "./poketype-common.scss";
 
 body,
 html {
