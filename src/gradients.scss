@@ -1,0 +1,83 @@
+// Default background gradient
+.default-gradient {
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 1s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+$animation-duration: 8s;
+
+//  Black
+.black-gradient {
+	background: linear-gradient(-45deg, #000000, #424242, #111111, #1a1a1a);
+	background-size: 400% 400%;
+	animation: gradient $animation-duration ease infinite ;
+}
+
+
+
+.blue-gradient {
+	background: linear-gradient(-45deg, #a0a0ff, #34349b, #5050e2, #7979f7);
+	background-size: 400% 400%;
+	animation: gradient $animation-duration ease infinite ;
+}
+
+.brown-gradient {
+	background: linear-gradient(-45deg, #75594c, #533e2f , #996c6c, #493729);
+	background-size: 400% 400%;
+	animation: gradient $animation-duration ease infinite ;
+}
+
+.gray-gradient {
+	background: linear-gradient(-45deg, #a0a0a0, #5a5a5a, #c0c0c0, #7a7a7a);
+	background-size: 400% 400%;
+	animation: gradient $animation-duration ease infinite ;
+}
+
+.green-gradient {
+	background: linear-gradient(-45deg, #a0ffa0, #349b34, #50e250, #79f779);
+	background-size: 400% 400%;
+	animation: gradient $animation-duration ease infinite ;
+}
+
+.pink-gradient {
+	background: linear-gradient(-45deg, #ffa0a0, #9b3434, #e25050, #f77979);
+	background-size: 400% 400%;
+	animation: gradient $animation-duration ease infinite ;
+}
+
+.purple-gradient {
+	background: linear-gradient(-45deg, #a0a0ff, #34349b, #5050e2, #7979f7);
+	background-size: 400% 400%;
+	animation: gradient $animation-duration ease infinite ;
+}
+
+.red-gradient {
+	background: linear-gradient(-45deg, #ffa0a0, #9b3434, #e25050, #f77979);
+	background-size: 400% 400%;
+	animation: gradient $animation-duration ease infinite ;
+}
+
+.white-gradient {
+	background: linear-gradient(-45deg, #ffffff, #bfbfbf, #e0e0e0, #cfcfcf);
+	background-size: 400% 400%;
+	animation: gradient $animation-duration ease infinite ;
+}
+
+.yellow-gradient {
+	background: linear-gradient(-45deg, #ffffa0, #bfbf34, #e0e050, #cfcf79);
+	background-size: 400% 400%;
+	animation: gradient $animation-duration ease infinite ;
+}

@@ -16,7 +16,7 @@ export class PokecardComponent implements OnInit {
 
   pokemon: Pokemon | null = null;
   species: PokemonSpecies | null = null;
-  cardColor = "#f5f5f5";
+  cardColor = "blue";
 
   constructor(public pokedex: PokedexService, public router: Router) {
   }
@@ -55,19 +55,7 @@ export class PokecardComponent implements OnInit {
   }
 
   pokemonColorToCSSColor(): string {
-
-    switch (this.species?.color.name || "") {
-      case "black":
-        return "#2b1e21";
-      case "brown":
-        return "#322327";
-      case "white":
-        return "#f5f5f5";
-      case "":
-        return "#f5f5f5";
-      default:
-        return this.species?.color.name || "#f5f5f5";
-    }
+    return this.species?.color.name || "white";
   }
 
 

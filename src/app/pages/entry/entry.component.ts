@@ -1,6 +1,6 @@
 import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Pokemon } from 'pokenode-ts';
+import { Pokemon, PokemonSpecies } from 'pokenode-ts';
 import { PokedexService } from 'src/app/services/pokedex.service';
 
 @Component({
@@ -11,8 +11,10 @@ import { PokedexService } from 'src/app/services/pokedex.service';
 export class EntryComponent implements AfterViewChecked {
   @ViewChild('pokemonViewRef') pokemonViewRef: ElementRef | null = null;
   pokemon: Pokemon | null = null;
+  pokemonSpecies: PokemonSpecies | null = null;
   eggGroups: string[] = [];
   pokemonName: string;
+
 
   constructor(public pokedex: PokedexService, public router: Router) {
     this.pokemonName = window.location.pathname.split('/')[2]; // It initially might be an id or a name
@@ -22,6 +24,7 @@ export class EntryComponent implements AfterViewChecked {
       console.log(pokemon);
 
       this.pokedex.client.pokemon.getPokemonSpeciesByName(this.pokemon.species.name).then((species) => {
+        this.pokemonSpecies = species;
         this.eggGroups = species.egg_groups.map((eggGroup) => pokedex.identifierToReadableName((eggGroup.name)));
       });
 

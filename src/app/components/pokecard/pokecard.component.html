@@ -2,7 +2,9 @@
   [attr.data-card-color]="this.cardColor"
   (click)="onClick()"
   [style]="'color:' + this.cardColor + ';'"
-  class="static shadow-xl grid p-2 w-[150px] h-[245px] card-gradient rounded-xl transform transition hover:scale-110 cursor-pointer select-none overflow-hidden"
+  class="static shadow-xl grid p-2 w-[150px] h-[245px] {{
+    this.cardColor
+  }}-gradient rounded-xl transform transition hover:scale-110 cursor-pointer select-none overflow-hidden"
   matBadge="#{{ this.displayNumber || '?' }}"
   matBadgePosition="after"
   matBadgeColor="primary"
@@ -26,7 +28,7 @@
   <!-- Card Content num/name/etc -->
   <!-- {{this.cardColor}}-300  -->
   <div
-    class="card-content rounded-b-lg place-items-center font-bold text-md bg-gradient-to-r from-cyan-500 to-blue-500"
+    class="card-content rounded-b-lg place-items-center font-bold text-md bg-gray-500/30"
   >
     <div
       [style]="'background:' + this.cardColor + ';'"
