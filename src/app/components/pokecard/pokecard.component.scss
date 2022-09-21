@@ -1,4 +1,5 @@
 .card-gradient {
+	// Default background gradient
 	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
@@ -17,28 +18,27 @@
 }
 
 
+
+.card-sprite-container {
+	position: relative;
+}
+
+// circle gradient comming from center
+.card-sprite {
+	filter: saturate(200%);
+}
+
 .card-bg {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-image: url("^assets/img/sparkles.webp");
-	background-position: 50% 50%;
-	background-size: 160%;
-	background-blend-mode: overlay;
-	z-index: 2;
-	filter: brightness(1) contrast(1);
-	transition: all .33s ease;
-	mix-blend-mode: color-dodge;
-	opacity: .75;
+	background: white;
+	opacity: 0.3
 }
 
-// circle gradient comming from center
-.card-sprite {
-	filter: saturate(200%);
-	background: radial-gradient(circle at center, currentColor , transparent 75%);
-}
+
 
 
 
@@ -47,7 +47,6 @@
 
 // Card label
 .card-label-bg {
-	background: linear-gradient(to right, #DC281E, #F00000);
 }
 
 // Card content grid
@@ -60,7 +59,11 @@
 	grid-row-gap: 0px;
 	}
 	
-.card-content-top { grid-area: 1 / 1 / 2 / 3; }
+.card-content-top { 
+	grid-area: 1 / 1 / 2 / 3;
+	color: white;
+	text-shadow: 0 0 5px black;
+}
 .card-content-bottom { grid-area: 2 / 1 / 3 / 3; }
 
 // Override badge size
@@ -70,6 +73,6 @@
 	width: 30px;
 	height: 30px;
 	line-height: 30px;
-	background: rgb(255,87,63);
-	background: radial-gradient(circle,  #DC281E 0%, #F00000 100%);
+	background: rgb(255, 255, 255);
+	color: black;
 }

@@ -1,17 +1,15 @@
 <div
+  [attr.data-card-color]="this.cardColor"
   (click)="onClick()"
-  class="static grid p-2 w-[150px] h-[245px] card-gradient rounded-xl transform transition hover:scale-110 cursor-pointer select-none overflow-hidden"
+  [style]="'color:' + this.cardColor + ';'"
+  class="static shadow-xl grid p-2 w-[150px] h-[245px] card-gradient rounded-xl transform transition hover:scale-110 cursor-pointer select-none overflow-hidden"
   matBadge="#{{ this.displayNumber || '?' }}"
   matBadgePosition="after"
   matBadgeColor="primary"
 >
   <!-- Card Header (img) -->
-  <div
-    [style]="'color:' + this.cardColor + ';'"
-    class="rounded-t-lg w-full bg-blue-300/20"
-  >
-    <div class="card-bg"></div>
-    <!-- w-[90%] h-auto min-h-[50%] object-contain -->
+  <div class="rounded-t-lg w-full card-sprite-container">
+    <span class="card-bg rounded-t-lg"></span>
     <img
       class="card-sprite p-2 m-auto w-[90%] h-auto min-h-[50%] object-contain"
       fetchpriority="low"
@@ -31,7 +29,8 @@
     class="card-content rounded-b-lg place-items-center font-bold text-md bg-gradient-to-r from-cyan-500 to-blue-500"
   >
     <div
-      class="card-content-top card-label-bg text-white p-1 h-min w-full text-center card-gradient justify-center align-middle flex"
+      [style]="'background:' + this.cardColor + ';'"
+      class="card-content-top card-label-bg p-1 h-min w-full text-center justify-center align-middle flex"
     >
       {{ pokedex.identifierToReadableName(this.pokemonName) }}
     </div>
