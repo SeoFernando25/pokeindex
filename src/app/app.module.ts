@@ -27,7 +27,7 @@ import { EntryComponent } from './pages/entry/entry.component';
 import { TypelabelComponent } from './components/typelabel/typelabel.component';
 import { PoketypeComponent } from './components/poketype/poketype.component';
 import { PoketypeCheckboxComponent } from './components/poketype-checkbox/poketype-checkbox.component';
-import { NgxCheckboxModule } from 'ngx-checkbox';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -53,7 +53,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
-    NgxCheckboxModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

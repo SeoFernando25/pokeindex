@@ -24,10 +24,7 @@
   </div>
 
   <!-- Search Results -->
-  <div
-    class="p-2 flex-1"
-    *ngIf="this.localFilteredPokemon.slice(0, 50).length !== 0"
-  >
+  <div class="p-2" *ngIf="this.localFilteredPokemon.length !== 0">
     <div class="text-lg" *ngIf="canShowSuggest()">
       Did you mean
       <a
@@ -54,9 +51,10 @@
         gap-4
       "
     >
-      <!-- Pokemon Card list -->
       <app-pokecard
-        *ngFor="let pokemonName of this.localFilteredPokemon.slice(0, 50)"
+        *ngFor="
+          let pokemonName of this.localFilteredPokemon.slice(0, this.maxShow)
+        "
         [pokemonName]="pokemonName"
       ></app-pokecard>
     </div>
@@ -66,7 +64,7 @@
   <!-- flex center horizontal and vertically -->
   <div
     class="flex justify-center flex-1 w-screen"
-    *ngIf="this.localFilteredPokemon.slice(0, 50).length === 0"
+    *ngIf="this.localFilteredPokemon.length === 0"
   >
     <!-- Aling vertical -->
     <div class="grid grid-cols-1 gap-4 place-items-center">

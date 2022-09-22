@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Types } from 'pokenode-ts';
@@ -9,11 +9,18 @@ import { PokedexService } from 'src/app/services/pokedex.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit, OnDestroy {
   typeFilter: Set<string> = new Set();
 
 
   localFilteredPokemon: string[] = [];
+
+  // Pokemon shown increment
+  defaultMaxShow = 20;
+  showMoreTresh = 0.95;
+  maxShow = 20;
+  pokemonShownIncrement = 20;
+
   pokemonTypesList: string[] = [];
 
   constructor(public pokedex: PokedexService, public route: Router, public translate: TranslateService) {
@@ -31,10 +38,20 @@ export class SearchComponent {
     let types = Object.values(Types);
     // Filter only strings and convert to lowercase
     this.pokemonTypesList = types.filter((type) => typeof type === "string").map((type) => (type as string).toLowerCase());
+
+  }
+
+  ngOnInit(): void {
     this.pokedex.filteredPokemon.subscribe((pokemons) => {
+      this.maxShow = this.defaultMaxShow; // Reset max pokemon shown on search
       this.localFilteredPokemon = pokemons;
       this.doFilter();
     });
+    document.addEventListener('scroll', () => this.onSearchScroll());
+  }
+
+  ngOnDestroy(): void {
+    document.removeEventListener('scroll', () => this.onSearchScroll());
   }
 
   randomPokemon() {
@@ -54,7 +71,7 @@ export class SearchComponent {
     } else {
       this.typeFilter.delete(type);
     }
-    this.doFilter();
+    // this.doFilter();
   }
 
   async getPokemonTypesByName(pokemon: string): Promise<string[]> {
@@ -99,4 +116,13 @@ export class SearchComponent {
     return this.pokedex.previousSearch.length !== 0 && !prevQuoted && nameToSuggest.toLowerCase() !== inputBoxName.toLowerCase();
   }
 
+  onSearchScroll() {
+    // Check if page is bellow 70% of the page
+    let scrollPercent = (document.documentElement.scrollTop + window.innerHeight) / document.documentElement.scrollHeight;
+    if (scrollPercent > this.showMoreTresh) {
+      // Load more pokemon
+      this.maxShow += this.pokemonShownIncrement;
+      this.doFilter();
+    }
+  }
 }

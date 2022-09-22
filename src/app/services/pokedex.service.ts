@@ -90,6 +90,17 @@ export class PokedexService {
       return;
     }
 
+    // If the search is a number, return n-th pokemon
+    if (!isNaN(Number(name))) {
+      let index = Number(name) - 1;
+      if (index < 0 || index >= this.pokemonIdentifiers.length) {
+        this.filteredPokemon.next([]);
+        return;
+      }
+      this.filteredPokemon.next([this.pokemonIdentifiers[index]]);
+      return;
+    }
+
 
 
 
