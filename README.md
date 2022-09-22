@@ -1,6 +1,6 @@
 # Pokeindex
 
-A minimalistic frontend for the [PokeAPI](https://pokeapi.co/).
+A minimalists frontend for the [PokeAPI](https://pokeapi.co/).
 
 [🌐 Live preview](https://pokeindex.pages.dev/)
 
