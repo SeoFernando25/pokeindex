@@ -24,3 +24,9 @@
 	background: rgb(255, 255, 255);
 	color: black;
 }
+
+// Focus and not hover
+.card-root:focus		:not(:hover) {
+	scale: 1.1;
+}
+
