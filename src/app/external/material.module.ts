@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 // Material Popups & Modals
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
     declarations: [],
@@ -34,6 +35,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatIconModule,
         MatBottomSheetModule,
         MatTooltipModule,
+        MatProgressBarModule
     ],
 })
 export class MaterialModule { }

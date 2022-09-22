@@ -13,6 +13,8 @@ export class EntryComponent implements AfterViewChecked {
   @ViewChild('pokemonViewRef') pokemonViewRef: ElementRef | null = null;
   pokemon: Pokemon | null = null;
   pokemonSpecies: PokemonSpecies | null = null;
+  displayWeight: string = "?";
+  displayHeight: string = "?";
   eggGroups: string[] = [];
   pokemonName: string;
 
@@ -22,6 +24,8 @@ export class EntryComponent implements AfterViewChecked {
     this.pokedex.client.pokemon.getPokemonByName(this.pokemonName).then((pokemon: Pokemon) => {
       this.pokemon = pokemon;
       this.pokemonName = this.pokemon.name; // Update to proper name in case it was an id
+      this.displayWeight = (this.pokemon.weight / 10).toFixed(1) + " kg";
+      this.displayHeight = (this.pokemon.height / 10).toFixed(1) + " m";
       console.log(pokemon);
 
       this.pokedex.client.pokemon.getPokemonSpeciesByName(this.pokemon.species.name).then((species) => {
