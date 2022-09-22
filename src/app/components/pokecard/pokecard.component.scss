@@ -1,6 +1,3 @@
-.card-sprite-container {
-	position: relative;
-}
 
 // circle gradient comming from center
 .card-sprite {
@@ -25,8 +22,5 @@
 	color: black;
 }
 
-// Focus and not hover
-.card-root:focus		:not(:hover) {
-	scale: 1.1;
-}
+
 
