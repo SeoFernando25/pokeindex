@@ -1,9 +1,9 @@
-<div
+<button
   (click)="onClick()"
   [style]="'color:' + this.cardColor + ';'"
   class="static shadow-xl grid p-2 w-[150px] h-[245px] {{
     this.cardColor
-  }}-gradient rounded-xl transform transition hover:scale-110 cursor-pointer select-none overflow-hidden"
+  }}-gradient card-root rounded-xl transform transition hover:scale-110 select-none overflow-hidden"
   matBadge="#{{ this.displayNumber || '?' }}"
   matBadgePosition="after"
   matBadgeColor="primary"
@@ -46,4 +46,4 @@
       ></app-poketype>
     </div>
   </div>
-</div>
+</button>

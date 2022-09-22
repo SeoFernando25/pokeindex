@@ -40,7 +40,6 @@ specifiers:
   karma-jasmine: ~5.1.0
   karma-jasmine-html-reporter: ~2.0.0
   ngx-checkbox: ^1.0.1
-  ngx-infinite-scroll: ^14.0.0
   pokenode-ts: ^1.17.0
   postcss: ^8.4.16
   rxjs: ^7.5.6
@@ -65,7 +64,6 @@ dependencies:
   '@ngx-translate/http-loader': 7.0.0_ocph3yxhientx6pm47ufqn3bsy
   axios: 0.27.2
   ngx-checkbox: 1.0.1_ici7bxm3f3ipt7voeaylpzxsu4
-  ngx-infinite-scroll: 14.0.0_ici7bxm3f3ipt7voeaylpzxsu4
   pokenode-ts: 1.17.0
   rxjs: 7.5.6
   tslib: 2.4.0
@@ -11999,17 +11997,6 @@ packages:
     peerDependencies:
       '@angular/common': ^14.0.0
       '@angular/core': ^14.0.0
-    dependencies:
-      '@angular/common': 14.2.2_i7tktysnynbuwpamqlvgeyyawi
-      '@angular/core': 14.2.2_rxjs@7.5.6+zone.js@0.11.8
-      tslib: 2.4.0
-    dev: false
-
-  /ngx-infinite-scroll/14.0.0_ici7bxm3f3ipt7voeaylpzxsu4:
-    resolution: {integrity: sha512-YZB5PBPXSERNtCGQRZTVflbgkh5asp01NPfC8KPItemmQik1Ip8ZCCbcyHA77TDTdilmaiu8TbguA3geg/LMWw==}
-    peerDependencies:
-      '@angular/common': '>=14.0.0 <15.0.0'
-      '@angular/core': '>=14.0.0 <15.0.0'
     dependencies:
       '@angular/common': 14.2.2_i7tktysnynbuwpamqlvgeyyawi
       '@angular/core': 14.2.2_rxjs@7.5.6+zone.js@0.11.8

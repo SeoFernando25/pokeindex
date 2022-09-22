@@ -27,7 +27,6 @@ import { EntryComponent } from './pages/entry/entry.component';
 import { TypelabelComponent } from './components/typelabel/typelabel.component';
 import { PoketypeComponent } from './components/poketype/poketype.component';
 import { PoketypeCheckboxComponent } from './components/poketype-checkbox/poketype-checkbox.component';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
