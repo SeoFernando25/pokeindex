@@ -43,7 +43,9 @@ export class PokedexService {
       this.pokemonIdentifiers = JSON.parse(localStorage.getItem('pokemonNames') || "}{");
       this.filteredPokemon.next(this.pokemonIdentifiers);
       console.log("Pokemon names loaded from local storage");
-      this.nameFilterPokemon(localStorage.getItem("search") || "Charizard"); // Initialize filteredPokemons
+      if (localStorage.getItem("search")) { // Initialize filteredPokemons
+        this.nameFilterPokemon(localStorage.getItem("search") || "");
+      }
       return;
     } catch (error) {
       console.log("Error loading pokemon names from local storage");
