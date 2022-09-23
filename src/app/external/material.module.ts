@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 // Material Popups & Modals
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
     declarations: [],
     exports: [
@@ -34,6 +34,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatIconModule,
         MatBottomSheetModule,
         MatTooltipModule,
+        MatSnackBarModule
     ],
 })
 export class MaterialModule { }

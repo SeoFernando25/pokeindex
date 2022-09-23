@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Pokedex, Types } from 'pokenode-ts';
+import { Types } from 'pokenode-ts';
 import { Subscription } from 'rxjs';
 import { PokeSearchService } from 'src/app/services/poke-search.service';
 import { PokedexService } from 'src/app/services/pokedex.service';
