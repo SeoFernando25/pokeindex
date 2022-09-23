@@ -26,6 +26,7 @@
           m-auto
           text-white text-center
           align-middle
+          justify-start
           p-1
           rounded-md
           text-lg
@@ -43,25 +44,28 @@
         class="
           whitespace-nowrap
           self-center
+          flex flex-wrap
           m-auto
+          justify-center
           text-lg
           font-bold
           gap-2
-          flex
         "
       >
         <span>
           {{ pokedex.identifierToReadableName(this.pokemonName) }}
         </span>
-        <app-poketype
-          *ngFor="let TName of this.pokemon?.types"
-          pokemonType="{{ TName.type.name }}"
-        ></app-poketype>
+        <div class="flex gap-2 self-center justify-center align-middle">
+          <app-poketype
+            *ngFor="let TName of this.pokemon?.types"
+            pokemonType="{{ TName.type.name }}"
+          ></app-poketype>
+        </div>
       </span>
       <!-- Right -->
-      <div class="flex gap-4">
+      <div class="flex flex-wrap gap-4 justify-end align-middle">
         <div
-          class="text-lg text-center self-center"
+          class="text-lg text-center"
           matTooltip="{{ 'weight' | translate }}"
         >
           <span class="fa-solid fa-weight-hanging text-white"></span>

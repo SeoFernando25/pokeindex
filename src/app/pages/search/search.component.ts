@@ -1,7 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Types } from 'pokenode-ts';
+import { Pokedex, Types } from 'pokenode-ts';
+import { Subscription } from 'rxjs';
+import { PokeSearchService } from 'src/app/services/poke-search.service';
 import { PokedexService } from 'src/app/services/pokedex.service';
 
 @Component({
@@ -10,6 +13,7 @@ import { PokedexService } from 'src/app/services/pokedex.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit, OnDestroy {
+
   typeFilter: Set<string> = new Set();
 
 
@@ -23,17 +27,14 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   pokemonTypesList: string[] = [];
 
-  constructor(public pokedex: PokedexService, public route: Router, public translate: TranslateService) {
-    // Check if route has a query parameter -> search/:query
-    let routeParts = this.route.url.split("/");
-    // Check if last part is a not "search" and not empty
-    if (routeParts[routeParts.length - 1] !== "search" && routeParts[routeParts.length - 1] !== "") {
-      let routerSearchQuery = routeParts[routeParts.length - 1];
-      routerSearchQuery = decodeURIComponent(routerSearchQuery);
-      // Convert url to readable name using decodeURIComponent
-      console.log("Searching for " + routerSearchQuery);
-      this.pokedex.nameFilterPokemon(routerSearchQuery);
-    }
+  constructor(
+    public pokeSearch: PokeSearchService,
+    public pokedex: PokedexService,
+    public router: Router,
+    private route: ActivatedRoute,
+    public translate: TranslateService,
+    public snackbar: MatSnackBar
+  ) {
 
     let types = Object.values(Types);
     // Filter only strings and convert to lowercase
@@ -41,8 +42,20 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   }
 
+
+
+  private routeSub: Subscription | null = null;
+  private pokeResultsSub: Subscription | null = null;
   ngOnInit(): void {
-    this.pokedex.filteredPokemon.subscribe((pokemons) => {
+    this.routeSub = this.route.params.subscribe(params => {
+      let q = params['query'] // Get main route query
+      if (q) {
+        this.pokeSearch.searchValue.next(q);
+      }
+    });
+
+
+    this.pokeResultsSub = this.pokeSearch.searchResults.subscribe((pokemons) => {
       this.maxShow = this.defaultMaxShow; // Reset max pokemon shown on search
       this.localFilteredPokemon = pokemons;
       this.doFilter();
@@ -52,16 +65,20 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     document.removeEventListener('scroll', () => this.onSearchScroll());
+    if (this.routeSub) {
+      this.routeSub.unsubscribe();
+    }
+    if (this.pokeResultsSub) {
+      this.pokeResultsSub.unsubscribe();
+    }
   }
 
   randomPokemon() {
-    console.log("Searching for random pokemon");
-    let randomPokemon = this.pokedex.pokemonIdentifiers[Math.floor(Math.random() * this.pokedex.pokemonIdentifiers.length)];
-    this.pokedex.nameFilterPokemon(randomPokemon);
-    this.pokedex.previousSearch = randomPokemon;
-    this.pokedex.nextSearchTask = randomPokemon;
+    this.snackbar.open("Searching for a random pokemon...", "Dismiss", { duration: 1500 });
+    let allPokemons = this.pokedex.pokemonIdentifiers.getValue();
+    let randomPokemon = allPokemons[Math.floor(Math.random() * allPokemons.length)];
+    this.pokeSearch.searchValue.next(randomPokemon);
     localStorage.setItem("search", randomPokemon);
-    this.route.navigate(['/search', randomPokemon]);
   }
 
   onToggleTypeFilter(event: any, type: string) {
@@ -71,7 +88,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     } else {
       this.typeFilter.delete(type);
     }
-    // this.doFilter();
+    // this.doFilter(); TODO: Fix filters
   }
 
   async getPokemonTypesByName(pokemon: string): Promise<string[]> {
@@ -89,7 +106,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     this.isSearching = true;
     // Initial name filter
-    let res = this.pokedex.filteredPokemon.getValue();
+    let res = this.pokeSearch.searchResults.getValue();
     // Filter by type
     for (let type of this.typeFilter) {
       for (let pokemon of res) {
@@ -107,22 +124,27 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   canShowSuggest() {
-    let prevQuoted = this.pokedex.previousSearch.startsWith('"') && this.pokedex.previousSearch.endsWith('"');
+    let searchQ = this.pokeSearch.searchValue.getValue();
+    let prevQuoted = searchQ.startsWith('"') && searchQ.endsWith('"');
 
     let nameToSuggest = this.pokedex.identifierToReadableName(this.localFilteredPokemon[0]);
-    let inputBoxName = this.pokedex.previousSearch;
+    let suggestionEquals = nameToSuggest.toLowerCase() === searchQ.toLowerCase();
 
     // Check if: search is not quoted, search is not empty, search is not equal to the first pokemon in the list
-    return this.pokedex.previousSearch.length !== 0 && !prevQuoted && nameToSuggest.toLowerCase() !== inputBoxName.toLowerCase();
+    return searchQ.length !== 0 && !prevQuoted && !suggestionEquals;
   }
 
   onSearchScroll() {
-    // Check if page is bellow 70% of the page
+    // Check if page is bellow tresh% of the page
     let scrollPercent = (document.documentElement.scrollTop + window.innerHeight) / document.documentElement.scrollHeight;
     if (scrollPercent > this.showMoreTresh) {
       // Load more pokemon
       this.maxShow += this.pokemonShownIncrement;
       this.doFilter();
     }
+  }
+
+  onSuggestionsClick() {
+    this.pokeSearch.searchValue.next('"' + this.pokedex.identifierToReadableName(this.localFilteredPokemon[0]) + '"');
   }
 }

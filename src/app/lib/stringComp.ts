@@ -1,6 +1,13 @@
 
 
 // https://github.com/aceakash/string-similarity
+
+/**
+ * Calculates the similarity between two strings.
+ * @param first string to compare
+ * @param second string to compare
+ * @returns a number between 0 and 1, where 1 is a perfect match
+ */
 export function getStringDifference(first: string, second: string) {
     first = first.replace(/\s+/g, '')
     second = second.replace(/\s+/g, '')
@@ -35,41 +42,36 @@ export function getStringDifference(first: string, second: string) {
 }
 
 /**
- * Helper function that maps all strings to a score with async iteration so that it doesn't block the UI
+ * Helper function that maps all strings to a score
+ * but uses shortcuts to avoid calling getStringDifference on all strings
  * @param mainString 
  * @param targetStrings 
  * @returns an array with the score of each string in the array
  */
-export async function getStringScores(baseString: string, stringLst: string[]): Promise<number[]> {
-    // start
-    let startT = performance.now();
-
+export function getStringScores(baseString: string, stringLst: string[]): number[] {
     baseString = baseString.toLowerCase();
-
     // Calculate starts with score
     let scores: number[] = stringLst.map(curStr => {
-        curStr = curStr.toLocaleLowerCase();
+        curStr = curStr.toLocaleLowerCase().replace('-', ' ');
         if (curStr === baseString) {
-            return Number.MAX_SAFE_INTEGER;
+            return 4;
         }
         // Starting or ending with gets priority over including
         if (curStr.startsWith(baseString)) {
-            return Number.MAX_SAFE_INTEGER - 1;
+            return 3;
         }
 
         // Starting or ending with gets priority over including
         if (curStr.endsWith(baseString)) {
-            return Number.MAX_SAFE_INTEGER - 2;
+            return 2;
         }
 
 
         if (curStr.includes(baseString)) {
-            return Number.MAX_SAFE_INTEGER - 3;
+            return 1;
         }
         return getStringDifference(baseString, curStr);
     });
 
-    // end
-    console.log("Time taken: " + (performance.now() - startT));
     return scores;
 }

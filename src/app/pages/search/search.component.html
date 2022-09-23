@@ -29,9 +29,7 @@
       Did you mean
       <a
         class="underline text-bold text-blue-500"
-        routerLink="/search/&quot;{{
-          this.pokedex.identifierToReadableName(this.localFilteredPokemon[0])
-        }}&quot;"
+        (click)="onSuggestionsClick()"
       >
         {{
           this.pokedex.identifierToReadableName(this.localFilteredPokemon[0])
