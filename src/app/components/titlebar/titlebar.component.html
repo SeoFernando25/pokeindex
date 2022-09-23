@@ -1,7 +1,7 @@
-<!-- Fine example for reference -->
-<!-- https://flowbite.com/docs/components/navbar/ -->
 <nav
+  [class.navbar-hide]="!this.showNavBar"
   class="
+    navbar
     p-4
     w-full
     bg-white
@@ -12,7 +12,8 @@
     items-center
     gap-4
     z-10
-    overflow-hidden
+    sticky
+    top-0
   "
 >
   <!-- Logo -->
@@ -28,18 +29,23 @@
   <app-locale-toggle></app-locale-toggle>
   <!-- Search Bar -->
 
-  <mat-form-field appearance="standard" class="flex-1" (ngSubmit)="onSubmit()">
+  <mat-form-field
+    appearance="standard"
+    class="flex-1"
+    (ngSubmit)="this.onSubmit()"
+  >
     <mat-label>{{ "search.description" | translate }}</mat-label>
     <span matPrefix class="fa-solid fa-magnifying-glass">&nbsp;</span>
     <input
       #searchInput
       matInput
+      type="text"
+      (keypress)="this.onKeyPress($event)"
       aria-label="Pokemon Name or Number"
-      [value]="searchValue"
-      (input)="onInput($event)"
-      (change)="onInput($event)"
-      (focus)="onFocus()"
-      (keydown.enter)="onSubmit()"
+      [value]="searchBarValue"
+      (input)="this.onInput($event)"
+      (focus)="this.onFocus()"
+      (keydown.enter)="this.onSubmit()"
     />
     <div matSuffix class="py-4">
       <span class="kbd">/</span>
