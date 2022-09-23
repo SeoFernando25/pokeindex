@@ -59,6 +59,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.maxShow = this.defaultMaxShow; // Reset max pokemon shown on search
       this.localFilteredPokemon = pokemons;
       this.doFilter();
+      this.onSearchScroll();
     });
     document.addEventListener('scroll', () => this.onSearchScroll());
   }
