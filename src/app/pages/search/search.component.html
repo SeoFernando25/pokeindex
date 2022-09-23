@@ -6,19 +6,11 @@
     <h2>{{ "search.filter.type" | translate }}:</h2>
     <div class="flex flex-wrap gap-4">
       <div *ngFor="let TName of this.pokemonTypesList">
-        <label for="{{ TName }}-checkbox" class="label-example">
-          <app-poketype-checkbox
-            pokemonType="{{ TName }}"
-            [isChecked]="true"
-          ></app-poketype-checkbox
-        ></label>
-        <input
-          type="checkbox"
-          id="{{ TName }}-checkbox"
-          class="hidden"
-          checked
-          (click)="onToggleTypeFilter($event, TName)"
-        />
+        <app-poketype-checkbox
+          pokemonType="{{ TName }}"
+          [isChecked]="true"
+          (click)="this.onToggleTypeFilter($event, TName)"
+        ></app-poketype-checkbox>
       </div>
     </div>
   </div>
@@ -61,19 +53,16 @@
   <!-- No cards found -->
   <!-- flex center horizontal and vertically -->
   <div
-    class="flex justify-center flex-1 w-screen"
+    class="grid grid-cols-1 p-2 gap-4 place-items-center justify-center"
     *ngIf="this.localFilteredPokemon.length === 0"
   >
-    <!-- Aling vertical -->
-    <div class="grid grid-cols-1 gap-4 place-items-center">
-      <h1 class="bold">Nothing found!</h1>
-      <img
-        (click)="randomPokemon()"
-        alt="MISSINGNO"
-        src="/assets/img/MISSINGNO.webp"
-        class="object-contain h-[50vh] pixelated cursor-pointer"
-      />
-      <span>A wild MISSINGNO appeared!</span> <br />
-    </div>
+    <h1 class="bold">Nothing found!</h1>
+    <img
+      (click)="randomPokemon()"
+      alt="MISSINGNO"
+      src="/assets/img/MISSINGNO.webp"
+      class="object-contain h-[50vh] pixelated cursor-pointer"
+    />
+    <span>A wild MISSINGNO appeared!</span> <br />
   </div>
 </div>

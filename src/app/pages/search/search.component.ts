@@ -77,18 +77,18 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.snackbar.open("Searching for a random pokemon...", "Dismiss", { duration: 1500 });
     let allPokemons = this.pokedex.pokemonIdentifiers.getValue();
     let randomPokemon = allPokemons[Math.floor(Math.random() * allPokemons.length)];
-    this.pokeSearch.searchValue.next(randomPokemon);
+    this.pokeSearch.searchValue.next(this.pokedex.identifierToReadableName(randomPokemon));
     localStorage.setItem("search", randomPokemon);
   }
 
   onToggleTypeFilter(event: any, type: string) {
-    let state = event.target.checked;
-    if (!state) {
-      this.typeFilter.add(type);
-    } else {
+    if (this.typeFilter.has(type)) {
       this.typeFilter.delete(type);
+    } else {
+      this.typeFilter.add(type);
     }
-    // this.doFilter(); TODO: Fix filters
+    // TODO: Fix filters
+    this.doFilter();
   }
 
   async getPokemonTypesByName(pokemon: string): Promise<string[]> {
@@ -96,15 +96,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     return poke.types.map((type) => type.type.name);
   }
 
-  isSearching = false;
-  searchReloadFlag = false;
   async doFilter() {
-    if (this.isSearching) {
-      this.searchReloadFlag = true;
-      return;
-    }
-
-    this.isSearching = true;
     // Initial name filter
     let res = this.pokeSearch.searchResults.getValue();
     // Filter by type
@@ -116,11 +108,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       }
     }
     this.localFilteredPokemon = res;
-    this.isSearching = false;
-    if (this.searchReloadFlag) {
-      this.searchReloadFlag = false;
-      this.doFilter();
-    }
   }
 
   canShowSuggest() {

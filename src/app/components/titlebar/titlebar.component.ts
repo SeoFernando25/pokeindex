@@ -36,6 +36,20 @@ export class TitlebarComponent implements OnInit, OnDestroy {
         this.searchBarValue = results;
       }
     });
+
+    this.routerSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // If route is /pokemon hide navbar for immersion mode
+        if (event.url.startsWith("/pokemon")) {
+          setTimeout(() => {
+            this.showNavBar = false;
+            console.log("Hide navbar");
+          }, 100);
+        }
+
+      }
+
+    });
   }
 
   searchBarKeyListenerBinded = this.searchBarKeyListener.bind(this);
@@ -52,10 +66,12 @@ export class TitlebarComponent implements OnInit, OnDestroy {
   showNavBar = true;
   scrollListenerBinded = this.scrollListener.bind(this);
   scrollListener(event: any) {
-    let scrollDiff = this.lastScroll - window.scrollY;
-    this.lastScroll = window.scrollY;
+    console.log("Scrolling");
+    let scrollY = -document.body.getBoundingClientRect().top; // Used to bypass sticky with top: 0
+    let scrollDiff = this.lastScroll - scrollY;
+    this.lastScroll = scrollY;
 
-    if (window.scrollY === 0 || scrollDiff > 0) {
+    if (scrollY === 0 || scrollDiff > 0) {
       this.showNavBar = true;
     } else {
       this.showNavBar = false;
@@ -65,6 +81,7 @@ export class TitlebarComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
+    console.log("Destroying titlebar");
     document.removeEventListener("keydown", this.searchBarKeyListenerBinded);
     document.removeEventListener("scroll", this.scrollListenerBinded);
     if (this.searchValueSubscription) {
